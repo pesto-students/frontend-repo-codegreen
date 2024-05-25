@@ -5,6 +5,7 @@
     border-radius: 40px;
     display: flex;
     flex-direction: column;
+    gap:20px;
     position: relative;
 }
 
@@ -29,4 +30,27 @@
 }
 .mainContent form div{
     width:100%;
+}
+.mainContent button{
+    margin : 2% 0;
+}
+
+.divider{
+    display: block;
+    margin : 15% 0;
+}
+.divider::before,.divider::after{
+    content: '';
+    display: inline-block;
+    width:calc(50% - 25px);
+    border-top:1px solid var(--color-dark-green);
+    margin: 0 5px;
+    transform: translateY(-0.4em);
+}
+#registerDiv{
+    text-align: right;
+}
+#registerDiv button{
+    
+    float:right;
 }
