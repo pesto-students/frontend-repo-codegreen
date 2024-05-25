@@ -1,0 +1,17 @@
+.ggButton{
+    background-color: var(--color-orange);
+    padding : 15px 20px;
+    color : var(--color-white);
+    font-weight: bold;
+    border-radius: 15px;
+    border:none;
+    cursor:pointer;
+}
+.ggButton:hover{
+    background-color: var(--color-darkest-green);
+}
+@media screen and (min-width:768px){
+    .ggButton{
+        width:300px;
+    }
+}

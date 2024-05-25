@@ -1,13 +1,47 @@
+
+/*Global Color Pallete*/
+:root{
+  --color-dark-green :#36592F;
+  --color-orange : #e48c3c;
+  --color-light-green : #CDCD8A;
+  --color-beige : #EFE7D2;
+  --color-darkest-green : #213B1C;
+  --color-white : white;
+}
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-align: left;
+  padding :3% 5%;
+  font-family: 'Prompt', sans-serif;
+  color:var(--color-darkest-green);
+  background-color: var(--color-beige);
+  font-size:14px;
+}
+main{
+  display: flex;
+  justify-content: flex-start;
+}
+button{
+  border:none;
+  font-family: 'Prompt', sans-serif;
+  font-size:1em;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a{
+  color:inherit;
+  text-decoration: none;
+}
+h1,h2.h3.h4.h5,h6,p{
+  margin:0;
+}
+/*Styles for tablet and desktop*/
+@media screen and (min-width:768px){
+  body{
+    font-size:20px;
+  }
+  main{
+    justify-content: center;
+  }
 }

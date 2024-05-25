@@ -1,0 +1,53 @@
+.home{
+    padding-top: 8%;
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+.home img{
+    align-self: center;
+    border-radius: 0 50px 0 50px;
+}
+.home h1{
+    font-size:1.5em;
+}
+.home div{
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
+/*Tablet*/
+@media screen and (min-width:768px) and (max-width:1400px){
+   .home{
+    padding-top: 5%;
+   }
+    .home h1{
+        font-size:2em;
+        line-height:1.2em;
+    }  
+  
+}
+/*Desktop*/
+@media screen and (min-width:1401px){
+    .home{
+        flex-direction: row;
+        flex-wrap: wrap;
+        height:auto;
+        gap:50px;
+        padding-top:5%;
+    }
+    .home img{
+        width:60%;
+        align-self:flex-start;
+    }
+    .home h1{
+        font-size:2.8em;
+        line-height:1.2em;
+    }
+    
+    .home div{
+        width:calc(40% - 50px);
+        flex-direction: column;
+       
+    }
+}

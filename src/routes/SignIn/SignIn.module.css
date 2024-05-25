@@ -1,0 +1,32 @@
+.bgCard{
+    background-color: var(--color-light-green);
+    padding : 10%;
+    margin-top:10%;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.sideContent{
+   /*  position: absolute;
+    top : 10%;
+    right: 10%; */
+    width: 100%;
+    text-align: right;
+    height:30%;
+    
+}
+
+.mainContent p span{
+    font-weight:700;
+}
+.mainContent form{
+    margin:5% 0;
+}
+.mainContent div{
+    margin: 2% 0;
+}
+.mainContent form div{
+    width:100%;
+}

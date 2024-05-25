@@ -1,13 +1,70 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import RootLayout from "./components/RootLayout";
+import Discuss from "./routes/Discuss/Discuss";
+import Shop from "./routes/Shop/Shop";
+import Dashboard from "./routes/Dashboard/Dashboard";
+import ErrorPage from "./routes/Error/ErrorPage";
+import Home from "./routes/Home/Home";
+import { createTheme } from '@mui/material/styles';
+import SignIn from "./routes/SignIn/SignIn";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const router = createBrowserRouter([
+  { 
+    path: "/", 
+    element: <RootLayout />, 
+    children : [
+      {
+        path : '/',
+        element : <Home/>
+      },
+      {
+        path : '/dashboard',
+        element : <Dashboard/>
+      },
+      {
+        path : '/discuss',
+        element : <Discuss/>
+      },
+      {
+        path : '/shop',
+        element : <Shop/>
+      },
+      {
+        path : '/sign-in',
+        element : <SignIn/>
+      }
+
+],
+errorElement : <ErrorPage/>}
+]);
+
+
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: '#757ce8',
+      main: '#3f50b5',
+      dark: '#002884',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#ff7961',
+      main: '#f44336',
+      dark: '#ba000d',
+      contrastText: '#000',
+    },
+  },
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 

@@ -1,0 +1,9 @@
+#hamburger img{
+    width:30px;
+}
+
+@media screen and (min-width:767px){
+    #hamburger{
+        display: none;
+    }
+}
