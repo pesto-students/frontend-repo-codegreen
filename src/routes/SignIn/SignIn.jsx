@@ -3,6 +3,7 @@ import Button from "../../components/Button/Button";
 import { TextField, InputLabelProps } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styles from "./SignIn.module.css";
+import googleIcon from '../../assets/icons/google.svg'
 
 function SignIn() {
   return (
@@ -31,18 +32,18 @@ function SignIn() {
             InputLabelProps={{ shrink: true }}
           />
 
-          <span>Forgot password?</span>
+         
           <NavLink>
-            <Button text="Sign in" />
+            <Button text="Sign in" isFullWidth />
           </NavLink>
-
-          <span>or</span>
-          <Button text="Sign in with Google" color="#EFE7D2" />
+          <p>Forgot password?</p>
+          <span className={styles.divider}>or</span>
+          <Button text="Sign in with Google" bgColor="#EFE7D2" color="#36592F" isFullWidth icon={googleIcon}/>
         </form>
       </div>
-      <div className={styles.sideContent}>
+      <div id={styles.registerDiv}>
         <p>Don't have an account?</p>
-        <Button text="Register" bgColor="#36592F" size="small" />
+        <Button text="Register" bgColor="#36592F" />
       </div>
     </div>
   );
