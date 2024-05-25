@@ -9,62 +9,60 @@ import Shop from "./routes/Shop/Shop";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import ErrorPage from "./routes/Error/ErrorPage";
 import Home from "./routes/Home/Home";
-import { createTheme } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SignIn from "./routes/SignIn/SignIn";
 
 const router = createBrowserRouter([
-  { 
-    path: "/", 
-    element: <RootLayout />, 
-    children : [
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
       {
-        path : '/',
-        element : <Home/>
+        path: "/",
+        element: <Home />,
       },
       {
-        path : '/dashboard',
-        element : <Dashboard/>
+        path: "/dashboard",
+        element: <Dashboard />,
       },
       {
-        path : '/discuss',
-        element : <Discuss/>
+        path: "/discuss",
+        element: <Discuss />,
       },
       {
-        path : '/shop',
-        element : <Shop/>
+        path: "/shop",
+        element: <Shop />,
       },
       {
-        path : '/sign-in',
-        element : <SignIn/>
-      }
-
-],
-errorElement : <ErrorPage/>}
+        path: "/sign-in",
+        element: <SignIn />,
+      },
+    ],
+    errorElement: <ErrorPage />,
+  },
 ]);
-
-
 
 const theme = createTheme({
   palette: {
     primary: {
-      light: '#757ce8',
-      main: '#3f50b5',
-      dark: '#002884',
-      contrastText: '#fff',
+      main: "#213B1C",
     },
     secondary: {
-      light: '#ff7961',
-      main: '#f44336',
-      dark: '#ba000d',
-      contrastText: '#000',
+      main: "#E48C3C",
     },
+  },
+  typography: {
+    fontFamily: ["Prompt", "sans-serif"].join(",")
+
   },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ThemeProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
