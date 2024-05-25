@@ -7,7 +7,3 @@
     gap: 5%;
     list-style-type: none;
 }
-
-#menu li:last-of-type{
-    flex-grow:1;
-}
