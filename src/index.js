@@ -11,6 +11,7 @@ import ErrorPage from "./routes/Error/ErrorPage";
 import Home from "./routes/Home/Home";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import SignIn from "./routes/SignIn/SignIn";
+import SignUp from "./routes/SignUp/SignUp";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         path: "/sign-in",
         element: <SignIn />,
       },
+      {
+        path: "/sign-up",
+        element: <SignUp />,
+      },
     ],
     errorElement: <ErrorPage />,
   },
@@ -52,7 +57,8 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: ["Prompt", "sans-serif"].join(",")
+    fontFamily: ["Prompt", "sans-serif"].join(","),
+    fontSize: 16
 
   },
 });

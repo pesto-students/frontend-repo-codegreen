@@ -1,35 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AdvancedImage } from "@cloudinary/react";
-import { Cloudinary } from "@cloudinary/url-gen";
-import { Resize } from "@cloudinary/url-gen/actions/resize";
 import styles from "./Home.module.css";
 import {NavLink} from 'react-router-dom';
 import Button from "./../../components/Button/Button";
+import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 
 function Home() {
-  const [heroImage, setHeroImage] = useState(null);
-
-  useEffect(() => {
-    const cld = new Cloudinary({ cloud: { cloudName: "dda6ipage" } });
-    const windowWidth = window.innerWidth;
-    setHeroImage(() => {
-      if (windowWidth < 768) {
-        return cld
-          .image("3482_weoqzp")
-          .resize(Resize.scale().width(1000))
-          .resize(Resize.crop().width(500).height(700).gravity("center"))
-          .format("auto") // Optimize delivery by resizing and applying auto-format and auto-quality
-          .quality("auto");
-      }
-
-      return cld
-        .image("3482_weoqzp")
-        .resize(Resize.scale().width(1200))
-        .format("auto") // Optimize delivery by resizing and applying auto-format and auto-quality
-        .quality("auto");
-    });
-  }, []);
-
+  const heroImage = useCloudinaryImage("3482_weoqzp").image;
   return (
     <main className={styles.home}>
       {heroImage && <AdvancedImage cldImg={heroImage} width="100%" />}
