@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import Button from "../../components/Button/Button";
 import { TextField } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import googleIcon from '../../assets/icons/google.svg'
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
@@ -9,6 +9,20 @@ import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 function SignIn() {
 
   const url = useCloudinaryImage('15256_atn3ju').url;
+   const emailRef = useRef('');
+   const passwordRef = useRef('');
+  const navigate = useNavigate();
+
+  const handleSignIn = () => {
+    try{
+      //Add logic to call sign-in endpoint and pass credentials
+
+      navigate('/dashboard');
+    }
+    catch(error){
+      console.log(error)
+    }
+  }
 
   return (
    <>
@@ -21,35 +35,39 @@ function SignIn() {
     <div className={styles.bgCard}>
    
       <div className={styles.mainContent}>
-        <p>
+        <p className="">
           Welcome to <span >GREENGROW</span>
         </p>
         <h1>Sign In</h1>
 
         <form>
           <TextField
-            id="standard-basic"
+            id="email"
             label="Enter your email address"
             variant="standard"
             required
-            InputLabelProps={{ shrink: true }}
+            InputLabelProps={{ shrink: true}}
+            InputProps={{ inputRef: emailRef }}
+           
           />
           <TextField
-            id="standard-basic"
+            id="password"
             label="Enter your password"
             variant="standard"
             required
             type="password"
             InputLabelProps={{ shrink: true }}
+            InputProps={{ inputRef: passwordRef }}
+            
           />
 
          
           <NavLink>
-            <Button text="Sign in" isFullWidth />
+            <Button text="Sign in" isFullWidth onClick={handleSignIn}/>
           </NavLink>
           <p>Forgot password?</p>
           <span className={styles.divider}>or</span>
-          <Button text="Sign in with Google" bgColor="#EFE7D2" color="#36592F" isFullWidth icon={googleIcon}/>
+          <Button text="Sign in with Google" bgColor="#EFE7D2" color="#36592F" isFullWidth icon={googleIcon} />
         </form>
       </div>
       <div id={styles.registerDiv}>
