@@ -11,7 +11,7 @@ function Home() {
     <main className={styles.home}>
       {heroImage && <AdvancedImage cldImg={heroImage} width="100%" />}
       <div>
-      <h1>Plant Trees, Grow Communities, Make a Greener World</h1>
+      <h1 className="font-bold">Plant Trees, Grow Communities, Make a Greener World</h1>
       <p>
         Planting trees is rewarding for the whole planet, but we believe in
         fostering a deeper connection. With GreenGrow, you don't just plant a

@@ -10,7 +10,7 @@ function Button({ text , bgColor, color,  isFullWidth, icon, onClick}) {
       backgroundColor : bgColor ? bgColor : '#e48c3c',
                   
     }} onClick={onClick}>
-        {text} {icon && <img src={icon}/>}
+        {text} {icon && <img src={icon} alt=''/>}
     </button>
   )
 }
