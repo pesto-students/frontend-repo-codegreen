@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "../../components/Button/Button";
-import { TextField, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import styles from "../SignIn/SignIn.module.css";
 import googleIcon from '../../assets/icons/google.svg';
@@ -24,7 +23,7 @@ function SignUp() {
            Welcome to <span >GREENGROW</span>
          </p>
          <h1>Sign Up</h1>
- 
+ {/* 
          <Box
       component="form"
       sx={{
@@ -32,8 +31,8 @@ function SignUp() {
       }}
       noValidate
       
-    >
-         <TextField
+    > */}
+         {/* <TextField
              id="standard-basic"
              label="Enter your first name"
              variant="standard"
@@ -62,7 +61,7 @@ function SignUp() {
              type="password"
              InputLabelProps={{ shrink: true }}
            />
- 
+  */}
           
            <NavLink>
              <Button text="Register" isFullWidth />
@@ -70,7 +69,7 @@ function SignUp() {
           
            <span className={styles.divider}>or</span>
            <Button text="Sign up with Google" bgColor="#EFE7D2" color="#36592F" isFullWidth icon={googleIcon}/>
-         </Box>
+        {/*  </Box> */}
        </div>
        <div id={styles.registerDiv}>
          <p>Already have an account?</p>

@@ -1,8 +1,11 @@
 import React from 'react'
+import UploadNewLogForm from '../../components/UploadNewLog/UploadNewLogForm'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <div>
+      <UploadNewLogForm />
+    </div>
   )
 }
 

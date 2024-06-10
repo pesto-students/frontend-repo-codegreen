@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import Button from "../../components/Button/Button";
-import { TextField } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import googleIcon from '../../assets/icons/google.svg'
@@ -41,7 +40,7 @@ function SignIn() {
         <h1>Sign In</h1>
 
         <form>
-          <TextField
+          {/* <TextField
             id="email"
             label="Enter your email address"
             variant="standard"
@@ -59,7 +58,7 @@ function SignIn() {
             InputLabelProps={{ shrink: true }}
             InputProps={{ inputRef: passwordRef }}
             
-          />
+          /> */}
 
          
           <NavLink>
