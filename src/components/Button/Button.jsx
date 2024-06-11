@@ -25,7 +25,7 @@ function Button({
 }) {
   return (
     <button
-      className={`bg-${bgColor} text-${color} w-full md:w-auto py-4 px-5 font-bold rounded-2xl border-0 cursor-pointer flex justify-center items-center gap-10 mt-3 :hover-bg-darkest-green ${className}`}
+      className={`bg-${bgColor} text-${color} w-full py-4 px-5 font-bold rounded-2xl border-0 cursor-pointer flex justify-center items-center gap-10 mt-3 :hover-bg-darkest-green ${className}`}
       onClick={onClick}
     >
       {text} {icon && <img src={icon} alt="" />}

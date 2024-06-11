@@ -13,5 +13,7 @@ module.exports = {
       "darkest-green": "#213B1C",
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
 };
