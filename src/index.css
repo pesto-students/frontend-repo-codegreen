@@ -38,6 +38,17 @@ a{
 h1,h2.h3.h4.h5,h6,p{
   margin:0;
 }
+.input-style{
+    @apply w-full px-0 bg-transparent border-0 border-b-2 border-orange focus:ring-0 focus:border-orange;
+}
+.form-divider::before,.form-divider::after{
+  content: '';
+    display: inline-block;
+    width:calc(50% - 25px);
+    border-top:1px solid var(--color-dark-green);
+    margin: 0 5px;
+    transform: translateY(-0.4em);
+}
 /*Styles for tablet and desktop*/
 @media screen and (min-width:768px){
   body{
