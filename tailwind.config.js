@@ -11,6 +11,7 @@ module.exports = {
       "light-green": "#CDCD8A",
       'beige': "#EFE7D2",
       "darkest-green": "#213B1C",
+      'red' : "#c90a0a",
     },
   },
   plugins: [

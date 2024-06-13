@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * Button component.
  *
@@ -10,11 +12,7 @@
  * @param {string} className - Additional CSS class names for the button. These are also tailwind classes.
  * @returns {JSX.Element} The rendered Button component.
  */
-import React from "react";
 
-/*
-
-*/
 function Button({
   text,
   bgColor = "orange",
@@ -22,11 +20,13 @@ function Button({
   icon,
   onClick,
   className,
+  attributes
 }) {
   return (
     <button
       className={`bg-${bgColor} text-${color} w-full py-4 px-5 font-bold rounded-2xl border-0 cursor-pointer flex justify-center items-center gap-10 mt-3 :hover-bg-darkest-green ${className}`}
       onClick={onClick}
+      {...attributes}
     >
       {text} {icon && <img src={icon} alt="" />}
     </button>

@@ -49,6 +49,12 @@ h1,h2.h3.h4.h5,h6,p{
     margin: 0 5px;
     transform: translateY(-0.4em);
 }
+
+/*Styles for Milestones selection buttons, when checked*/
+#milestones input:checked + label{
+  @apply bg-orange text-darkest-green font-bold
+}
+
 /*Styles for tablet and desktop*/
 @media screen and (min-width:768px){
   body{
