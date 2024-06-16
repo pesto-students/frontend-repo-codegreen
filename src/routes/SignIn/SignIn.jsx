@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Button from "../../components/Button/Button";
 import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
@@ -9,17 +9,34 @@ function SignIn() {
   const url = useCloudinaryImage("15256_atn3ju").url;
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
-  const handleSignIn = () => {
-    try {
-      //Add logic to call sign-in endpoint and pass credentials
-
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
+  const handleSignIn = () => {   
+      
+      fetch("/sign-in", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          email : emailRef.current.value, 
+          password : passwordRef.current.value}),
+      })
+        .then((response) => {
+          if (response.ok) {
+            navigate("/dashboard");
+          } else {
+            setError(response.message);
+            emailRef.current.value = "";
+            passwordRef.current.value = "";
+          }
+        })
+        .catch((error) => {
+          setError(error.message);
+        });      
     }
-  };
+  
 
   return (
     <>
@@ -36,7 +53,7 @@ function SignIn() {
           </p>
           <h1 className="text-3xl font-bold">Sign In</h1>
 
-          <form className="mx-0 my-[5%] w-full space-y-4 flex flex-col items-end">
+          <form className="mx-0 my-[5%] w-full space-y-6 flex flex-col items-end">
             <label htmlFor="email" className="block w-full">
               Enter your e-mail address
               <input
@@ -55,24 +72,35 @@ function SignIn() {
                 ref={passwordRef}
               />
             </label>
-            <NavLink className='w-full flex flex-row justify-end'>
-              <Button text="Sign in" isFullWidth onClick={handleSignIn} className="mt-8 md:w-[40%]"/>
-            </NavLink>
+            {
+              error && <p className="text-red font-semibold text-sm w-full">{error}</p>
+            }
+            
+              <Button
+                text="Sign in"
+                isFullWidth
+                onClick={handleSignIn}
+               />
+           
             <p className="text-sm">Forgot password?</p>
-            </form>
-            <span className="m-0 block form-divider w-full" >or</span>
-            <Button
-              text="Sign in with Google"
-              bgColor="beige"
-              color="darkest-green"
-              icon={googleIcon}
-              className="gap-1 lg:w-[100%] "
-            />
+          </form>
+          <span className="m-0 block form-divider w-full">or</span>
+          <Button
+            text="Sign in with Google"
+            bgColor="beige"
+            color="darkest-green"
+            icon={googleIcon}
+            className="gap-1 lg:w-[100%] "
+          />
         </div>
         <div className="text-right">
           <p>Don't have an account?</p>
-          <NavLink to="/sign-up" className='w-full flex flex-row justify-end'>
-            <Button text="Register" bgColor="darkest-green" className="mt-8 md:w-[40%]"/>
+          <NavLink to="/sign-up" className="w-full flex flex-row justify-end">
+            <Button
+              text="Register"
+              bgColor="darkest-green"
+              className="mt-8 md:w-[40%]"
+            />
           </NavLink>
         </div>
       </div>
