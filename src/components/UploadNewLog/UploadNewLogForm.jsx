@@ -30,9 +30,6 @@ function UploadNewLogForm() {
     // Example using fetch:
     fetch("/api/upload", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
       body: formData,
     })
       .then((response) => response.json())

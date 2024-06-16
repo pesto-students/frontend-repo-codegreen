@@ -10,6 +10,8 @@ import React from "react";
  * @param {string} icon - The URL of the icon to be displayed alongside the text.
  * @param {function} onClick - The function to be called when the button is clicked.
  * @param {string} className - Additional CSS class names for the button. These are also tailwind classes.
+ * @param {string} type - The type of the button. Example : 'submit'
+ * @param {string} attributes - Additional attributes for the button like 'disabled'
  * @returns {JSX.Element} The rendered Button component.
  */
 
@@ -20,12 +22,14 @@ function Button({
   icon,
   onClick,
   className,
+  type,
   attributes
 }) {
   return (
     <button
       className={`bg-${bgColor} text-${color} w-full py-4 px-5 font-bold rounded-2xl border-0 cursor-pointer flex justify-center items-center gap-10 mt-3 :hover-bg-darkest-green ${className}`}
       onClick={onClick}
+      type={type}
       {...attributes}
     >
       {text} {icon && <img src={icon} alt="" />}
