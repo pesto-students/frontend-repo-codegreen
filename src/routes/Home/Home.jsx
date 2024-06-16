@@ -8,7 +8,7 @@ import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 function Home() {
   const heroImage = useCloudinaryImage("3482_weoqzp").image;
   return (
-    <main className={styles.home}>
+    <div className={styles.home}>
       {heroImage && <AdvancedImage cldImg={heroImage} width="100%" />}
       <div>
       <h1 className="font-bold">Plant Trees, Grow Communities, Make a Greener World</h1>
@@ -24,7 +24,7 @@ function Home() {
       </NavLink>
       </div>
       
-    </main>
+    </div>
   );
 }
 
