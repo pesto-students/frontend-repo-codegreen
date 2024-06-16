@@ -4,7 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
-import Discuss from "./routes/Discuss/Discuss";
+import Discuss from "./routes/Discuss";
 import Shop from "./routes/Shop/Shop";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import ErrorPage from "./routes/Error/ErrorPage";
