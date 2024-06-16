@@ -1,0 +1,222 @@
+.userProfile{
+    position: relative;
+    background-color: #CDCD8A;
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+
+}
+.userIcon{
+    position: absolute;
+    height: 45px;
+    width: 45px;
+}
+.coinsBtn{
+    width: 100px;
+    height: 55px;
+    border-radius: 15px;
+    padding:  6px 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(120.192deg, rgba(54, 89, 47, 100%) 27%, rgba(205, 205, 138, 100%) 100%);
+}
+.profileSection{
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #213B1C;
+    padding-bottom: 20px;
+}
+.dashboardContainer{
+    display: block;
+    width: 100%;
+}
+.usernameWrppr{
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    align-items: center;
+}
+.userName{
+    font-size: 24px;
+    font-weight: 600;
+}
+.greetingTxt{
+    font-size: 20px;
+    margin: auto;
+    padding: 18px 0px;
+}
+.saplingsWrapper{
+    display: flex;
+    flex-direction: column;
+    /* margin-top: 24px; */
+}
+.spBox{
+    /* width: 80vw; */
+    position: relative;
+    background-color: #CDCD8A;
+    margin: 12px 0px;
+    border-radius: 0px 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 25px;
+    padding:  36px 24px;
+}
+.spImg{
+    margin: 16px;
+    height: 100px;
+    width: 150px;
+    border-radius: 8px;
+}
+.spInfo{
+    display: flex;
+    flex-direction: column;
+}
+.spStatus{
+    position: absolute;
+    top: -15px;
+    background-color: #213B1C;
+    color: #fff;
+    padding: 8px 12px;
+    font-weight: 600;
+    border-radius: 15px;
+}
+.spName{
+    font-size: 24px;
+    font-weight: bold;
+    color: #213B1C;
+}
+.spDate, .spLocation{
+    color: #757575;
+    font-size: 12px;
+    font-weight: bold;
+}
+.addUpBtn{
+    background-color: var(--color-orange);
+    padding : 15px 20px;
+    color : var(--color-white);
+    font-weight: bold;
+    border-radius: 15px;
+    border:none;
+    cursor:pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    margin-top:10px;
+    font-size: 18px;
+}
+.addUpBtn img{
+    width:26px;
+}
+.treeImg{
+    display: none;
+}
+@media screen and (min-width:768px){
+    .greetingTxt{
+        font-size: 24px;
+    }
+    .addNewBtnSection{
+        width: 25vw;
+        margin: 18px 0px;
+    }
+
+    .dashboardContainer{
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+    }
+    .dashWrapper{
+        display: flex;
+        flex-direction: column;
+        /* width: 55vw; */
+
+    }
+    .profileSection{
+        width: 20%;
+        flex-direction: column;
+        border-right: 3px solid black;
+        border-bottom: none;
+        margin: 25px 0px;
+        /* justify-content: flex-start; */
+        gap: 50px;
+    }
+    .coinsBtn{
+        height: 80px;
+        width: 120px;
+    }
+    .saplingsWrapper{
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 24px;
+    }
+    .treeImg{
+        width: 200px;
+        height: 250px;
+        display: block;
+    }
+    .userProfileSection{
+        height: 100%;
+        display: flex;
+        /* justify-content: space-around; */
+        gap: 35px;
+        flex-direction: column;
+        align-items: center;
+    }
+    .usEditTxt{
+        font-size: 14px;
+    }
+    .userIcon{
+        height: 115px;
+        width: 115px;
+    }
+    .userProfile{
+        height: 120px;
+        width: 120px;
+    }
+
+}
+@media screen and (min-width:768px) and (max-width:1047px) {
+    .spBox{
+        gap: 0px;
+        padding: 24px 18px;
+    }
+    .dashboardContainer{
+        gap: 15px;
+    }
+    .profileSection{
+        width: 18%;
+        margin: 15px 0px;
+    }
+    .coinsBtn{
+        width: 100px;
+        height: 60px;
+        padding: 4px 12px;
+    }
+    .spImg{
+        width: 120px;
+        height: 80px;
+    }
+    .addUpBtn{
+        font-size: 16px;
+        /* width: 100px !important; */
+        /* height: 75px; */
+    }
+    .spStatus{
+        font-size: 14px;
+    }
+    .spName{
+        font-size: 18px;margin-top: 14px;
+    }
+    .coinsBtn{
+        font-size: 18px;
+    }
+    .treeImg{
+        width: 200px;
+        height: 180px;
+        display: block;
+    }
+    
+}
