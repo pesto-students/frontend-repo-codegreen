@@ -1,5 +1,4 @@
-import React, { useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../Button/Button";
 
 const milestones = {
@@ -9,11 +8,39 @@ const milestones = {
 };
 
 function Step2(props) {
+  const [location, setLocation] = useState("");
+
+  useEffect(() => {
+    async function success(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+     
+      fetch(
+        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyB2b9ST9sZpVVniiPoLqpRZT9lRjeFON40`
+      )
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data.results[0].formatted_address);
+          setLocation(data.results[0].formatted_address);
+        })
+        .catch(function (err) {
+          console.warn("Something went wrong.", err);
+        });
+    }
+    if (!navigator.geolocation) {
+      console.log("Geolocation is not supported by your browser");
+    } else {
+      console.log(navigator.geolocation.getCurrentPosition(success));
+    }
+  }, []);
+
   const [selectedMilestones, setSelectedMilestones] = useState([]);
   const logDetails = {
-    treeName: useRef(''),
-    location: useRef(''),
-    date: useRef(''),
+    treeName: useRef(""),
+    location: useRef(""),
+    date: useRef(""),
     postOnForum: useRef(false),
   };
 
@@ -65,7 +92,7 @@ function Step2(props) {
             id="location"
             type="text"
             className="form-input input-style"
-            ref={logDetails.location}
+            value={location}
           />
         </label>
         <label htmlFor="date" className="block w-full xl:w-[30%] md:text-base">
@@ -83,7 +110,7 @@ function Step2(props) {
             Select one or more Milestones
           </legend>
 
-          <ul class="flex flex-col lg:flex-row w-full gap-6 md:grid-cols-3">
+          <ul className="flex flex-col lg:flex-row w-full gap-6 md:grid-cols-3">
             {Object.keys(milestones).map((stage) => {
               return (
                 <li key={stage} className="flex flex-row flex-wrap gap-3">
@@ -105,9 +132,9 @@ function Step2(props) {
                         />
                         <label
                           htmlFor={milestone}
-                          class="flex items-center justify-between  p-3 bg-dark-green text-white rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                          className="flex items-center justify-between  p-3 bg-dark-green text-white rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
                         >
-                          <div class="inline">
+                          <div className="inline">
                             <div className="w-full text-sm">{milestone}</div>
                           </div>
                         </label>
@@ -137,16 +164,14 @@ function Step2(props) {
             onClick={handleSubmit}
           />
         </div>
-      
-          <Button
-            text="Back"
-            className="mt-8 lg:w-[30%]"
-            bgColor="dark-green"
-            onClick={props.onBackPress}
-            />
-        
-      </form>
 
+        <Button
+          text="Back"
+          className="mt-8 lg:w-[30%]"
+          bgColor="dark-green"
+          onClick={props.onBackPress}
+        />
+      </form>
     </>
   );
 }

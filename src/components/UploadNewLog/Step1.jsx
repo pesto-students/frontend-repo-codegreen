@@ -3,7 +3,7 @@ import Button from "../Button/Button";
 import closeIcon from "../../assets/icons/close.png";
 
 function Step1(props) {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(props.images);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -80,9 +80,9 @@ function Step1(props) {
           />
         </label>
       </div>
-      <div className="w-full flex flex-row gap-2 ">
+      <div className="w-full flex flex-row gap-4 ">
         {images.map((image, index) => (
-          <div className="relative">
+          <div className="relative" key={'image' + index}>
             <img
               key={index}
               src={URL.createObjectURL(image)}
