@@ -13,7 +13,6 @@ function UploadNewLogForm() {
   const getImages = (images) => {
     setCurrentStep(2);
     setImages(images);
-    console.log(images);
   };
 
   const getDetails = (details) => {
@@ -86,7 +85,7 @@ function UploadNewLogForm() {
         </div>
 
         {currentStep === 1 ? (
-          <Step1 onNextClick={getImages} />
+          <Step1 onNextClick={getImages} images={images}/>
         ) : (
           <Step2 onDetailsSubmit={getDetails} onBackPress={() => setCurrentStep(1)}/>
         )}
