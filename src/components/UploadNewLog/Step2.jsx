@@ -16,14 +16,10 @@ function Step2(props) {
       const longitude = position.coords.longitude;
      
       fetch(
-        `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyB2b9ST9sZpVVniiPoLqpRZT9lRjeFON40`
+        `/api/location?latitude=${latitude}&longitude=${longitude}`
       )
         .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data.results[0].formatted_address);
-          setLocation(data.results[0].formatted_address);
+          setLocation(response);
         })
         .catch(function (err) {
           console.warn("Something went wrong.", err);
@@ -32,7 +28,7 @@ function Step2(props) {
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported by your browser");
     } else {
-      console.log(navigator.geolocation.getCurrentPosition(success));
+      navigator.geolocation.getCurrentPosition(success);
     }
   }, []);
 
