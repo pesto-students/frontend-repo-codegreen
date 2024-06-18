@@ -4,13 +4,15 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
-import Discuss from "./routes/Discuss";
+import Forum from "./routes/Forum/Forum";
 import Shop from "./routes/Shop/Shop";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import ErrorPage from "./routes/Error/ErrorPage";
 import Home from "./routes/Home/Home";
 import SignIn from "./routes/SignIn/SignIn";
 import SignUp from "./routes/SignUp/SignUp";
+import Post from "./routes/Forum/Post";
+import PostsByCategory from "./routes/Forum/PostsByCategory";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +20,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        path: "/",
+        index: true,
         element: <Home />,
       },
       {
@@ -27,7 +29,15 @@ const router = createBrowserRouter([
       },
       {
         path: "/discuss",
-        element: <Discuss />,
+        element: <Forum />,        
+      },
+      {
+        path : "/discuss/:category",
+        element : <PostsByCategory />
+      },
+      {
+        path : 'discuss/:category/:id',
+           element : <Post />
       },
       {
         path: "/shop",
