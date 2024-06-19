@@ -2,7 +2,28 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx}"],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'reveal-down': 'reveal-down 0.5s ease-out',
+      },
+      keyframes: {
+        'reveal-down': {
+          '0%': {
+            opacity: 0,
+            height : '0',
+          },
+          '50%' : {
+            opacity: 0.5,
+            height : '50%',
+          }
+          ,
+          '100%': {
+            opacity: 1,
+            height : 'auto',
+          },
+        },
+      }
+    },
     colors: {
       transparent: "transparent",
       'white': "#ffffff",

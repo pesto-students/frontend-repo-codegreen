@@ -6,56 +6,59 @@ import upvoteIcon from "../../assets/icons/upvoteIcon.png"
 import downvoteIcon from "../../assets/icons/downvoteIcon.png"
 import { Link, useParams } from "react-router-dom";
 
-
 const posts = [
   {
-    id : 1,
+    id: 1,
     title: "How to plant tomatoes",
-    answersCount : 2,
-    votes : {
-      upvotes : 5,
-      downvotes : 0
+    description: "I need help with planting tomatoes in my garden. Any tips?",
+    answersCount: 2,
+    votes: {
+      upvotes: 5,
+      downvotes: 0
     },
-    author : "John Doe",
-    date : "16 Oct 2023",
-    time : "12:00",
+    author: "John Doe",
+    date: "16 Oct 2023",
+    time: "12:00",
+  },
+  {
+    id: 2,
+    title: "Best fertilizer for roses",
+    description: "What is the best fertilizer to use for growing beautiful roses?",
+    answersCount: 4,
+    votes: {
+      upvotes: 10,
+      downvotes: 2
     },
-    {
-      id : 2,
-      title: "Best fertilizer for roses",
-      answersCount: 4,
-      votes: {
-        upvotes: 10,
-        downvotes: 2
-      },
-      author: "Jane Smith",
-      date: "20 Oct 2023",
-      time: "14:30",
+    author: "Jane Smith",
+    date: "20 Oct 2023",
+    time: "14:30",
+  },
+  {
+    id: 3,
+    title: "Tips for growing herbs indoors",
+    description: "I'm looking for tips on successfully growing herbs indoors all year round. Any suggestions?",
+    answersCount: 6,
+    votes: {
+      upvotes: 8,
+      downvotes: 1
     },
-    {
-      id : 3,
-      title: "Tips for growing herbs indoors",
-      answersCount: 6,
-      votes: {
-        upvotes: 8,
-        downvotes: 1
-      },
-      author: "Alex Johnson",
-      date: "22 Oct 2023",
-      time: "10:15",
+    author: "Alex Johnson",
+    date: "22 Oct 2023",
+    time: "10:15",
+  },
+  {
+    id: 4,
+    title: "Dealing with garden pests",
+    description: "I'm having trouble with garden pests. Any effective strategies for dealing with them?",
+    answersCount: 3,
+    votes: {
+      upvotes: 6,
+      downvotes: 3
     },
-    {
-      id : 4,
-      title: "Dealing with garden pests",
-      answersCount: 3,
-      votes: {
-        upvotes: 6,
-        downvotes: 3
-      },
-      author: "Sarah Thompson",
-      date: "25 Oct 2023",
-      time: "16:45",
-    }
+    author: "Sarah Thompson",
+    date: "25 Oct 2023",
+    time: "16:45",
+  }
 ]
 
 function PostsByCategory() {
@@ -67,7 +70,7 @@ function PostsByCategory() {
     </Link>
   <div className="flex flex-row justify-between items-center">
     <h1 className="font-bold text-3xl">General</h1>
-    <Button text="Create Post" className="w-[20%]"/>
+    <Button text="Create Post" className="!w-[20%]"/>
     </div>
 
     <div id="posts" className="w-full">
@@ -75,7 +78,7 @@ function PostsByCategory() {
           <thead className="text-gray text-sm md:text-base">
             <tr>
               <th className="w-1/2 py-2">posts</th>
-              <th className="py-2">answers</th>
+              <th className="py-2 text-center md:text-left">answers</th>
               <th className="py-2">votes</th>
             </tr>
           </thead>
@@ -88,8 +91,8 @@ function PostsByCategory() {
                     <img src={postIconBullet} className="w-[30px] md:w-auto"/>
                     <Link to={`/discuss/${category}/${post.id}`}>{post.title}</Link>
                   </td>
-                  <td>{post.answersCount}</td>
-                  <td className="flex flex-nowrap gap-2 items-center"> <img src={upvoteIcon} alt="Upvotes" className="w-8"/>{post.votes.upvotes} <img src={downvoteIcon} alt="Downvotes" className="w-8"/>{post.votes.downvotes}</td>
+                  <td className="text-center md:text-left">{post.answersCount}</td>
+                  <td><div className="flex flex-nowrap gap-2 items-center "> <img src={upvoteIcon} alt="Upvotes" className="w-4 md:w-8"/>{post.votes.upvotes} <img src={downvoteIcon} alt="Downvotes" className="w-4 md:w-8"/>{post.votes.downvotes}</div></td>
                 </tr>
               );
             })}
