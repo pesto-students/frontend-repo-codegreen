@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import Button from "../../components/Button/Button";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import googleIcon from "../../assets/icons/google.svg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
@@ -12,29 +12,35 @@ function SignIn() {
   const [error, setError] = React.useState('');
   const navigate = useNavigate();
 
-  const handleSignIn = () => {   
-      
-      fetch("/sign-in", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ 
-          email : emailRef.current.value, 
-          password : passwordRef.current.value}),
-      })
-        .then((response) => {
-          if (response.ok) {
-            navigate("/dashboard");
-          } else {
-            setError(response.message);
-            emailRef.current.value = "";
-            passwordRef.current.value = "";
-          }
+  const handleSignIn = (e) => {   
+      e.preventDefault();
+      try{
+        fetch("/sign-in", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ 
+            email : emailRef.current.value, 
+            password : passwordRef.current.value}),
         })
-        .catch((error) => {
+          .then((response) => {
+            if (response.ok) {
+              navigate("/dashboard");
+            } else {
+              setError(response.message);
+              emailRef.current.value = "";
+              passwordRef.current.value = "";
+            }
+          })
+          .catch((error) => {
+            setError(error.message);
+          }); 
+      }
+        catch(error){
           setError(error.message);
-        });   
+
+        }
     }
   
 
@@ -53,7 +59,7 @@ function SignIn() {
           </p>
           <h1 className="text-3xl font-bold">Sign In</h1>
 
-          <form className="mx-0 my-[5%] w-full space-y-6 flex flex-col items-end">
+          <form className="mx-0 my-[5%] w-full space-y-6 flex flex-col items-end" onSubmit={e => handleSignIn(e)}>
             <label htmlFor="email" className="block w-full">
               Enter your e-mail address
               <input
@@ -79,7 +85,7 @@ function SignIn() {
               <Button
                 text="Sign in"
                 isFullWidth
-                onClick={handleSignIn}
+                type="submit"
                />
            
             <p className="text-sm">Forgot password?</p>
@@ -95,13 +101,13 @@ function SignIn() {
         </div>
         <div className="text-right">
           <p>Don't have an account?</p>
-          <NavLink to="/sign-up" className="w-full flex flex-row justify-end">
+          <Link to="/sign-up" className="w-full flex flex-row justify-end">
             <Button
               text="Register"
               bgColor="darkest-green"
               className="mt-8 md:w-[40%]"
             />
-          </NavLink>
+          </Link>
         </div>
       </div>
     </>
