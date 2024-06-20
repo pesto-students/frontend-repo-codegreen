@@ -3,6 +3,25 @@ module.exports = {
   content: ["./src/**/*.{js,jsx}"],
   theme: {
     extend: {
+      animation: {
+        'reveal-down': 'reveal-down 0.5s ease-out',
+      },
+      keyframes: {
+        'reveal-down': {
+          '0%': {
+            opacity: 0,
+            height : '0',
+          },
+          '50%' : {
+            opacity: 0.5,
+            height : '50%',
+          }
+          ,
+          '100%': {
+            opacity: 1,
+            height : 'auto',
+          },
+        },
       borderRadius: {
         '4xl': '2.5rem',
         '5xl': '3rem'
@@ -17,6 +36,7 @@ module.exports = {
       'beige': "#EFE7D2",
       "darkest-green": "#213B1C",
       'red' : "#c90a0a",
+      'gray' : "#8F97A6"
     },
   },
   plugins: [
