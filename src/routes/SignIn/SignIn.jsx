@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./SignIn.module.css";
 import googleIcon from "../../assets/icons/google.svg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
+import { useUser } from '../../store/UserContext'; 
+
 
 function SignIn() {
   const url = useCloudinaryImage("15256_atn3ju").url;
@@ -11,11 +13,12 @@ function SignIn() {
   const passwordRef = useRef("");
   const [error, setError] = React.useState('');
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
   const handleSignIn = (e) => {   
       e.preventDefault();
       try{
-        fetch("/sign-in", {
+        fetch("/signIn", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -24,8 +27,11 @@ function SignIn() {
             email : emailRef.current.value, 
             password : passwordRef.current.value}),
         })
-          .then((response) => {
+          .then(async (response) => {
             if (response.ok) {
+              const data = await response.json();
+              setUser(data.user);
+              localStorage.setItem("token", data.token);
               navigate("/dashboard");
             } else {
               setError(response.message);
@@ -52,7 +58,7 @@ function SignIn() {
           backgroundImage: `url('${url}')`,
         }}
       />
-      <div className="w-full md:w-[80%] lg:w-[60%] bg-light-green p-[10%] lg:p-[5%] mt-[5%] md:mt-[10%] rounded-[40px] flex flex-col gap-5 relative z-2">
+      <div className="w-full md:w-[80%] lg:w-[60%] bg-light-green p-[10%] lg:p-[5%] mt-[5%] rounded-[40px] flex flex-col gap-5 relative z-2">
         <div>
           <p className="mb-5">
             Welcome to <span className="font-bold">GREENGROW</span>
@@ -90,14 +96,14 @@ function SignIn() {
            
             <p className="text-sm">Forgot password?</p>
           </form>
-          <span className="m-0 block form-divider w-full">or</span>
+          {/* <span className="m-0 block form-divider w-full">or</span>
           <Button
             text="Sign in with Google"
             bgColor="beige"
             color="darkest-green"
             icon={googleIcon}
             className="gap-1 lg:w-[100%] "
-          />
+          /> */}
         </div>
         <div className="text-right">
           <p>Don't have an account?</p>

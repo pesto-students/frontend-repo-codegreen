@@ -4,23 +4,28 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styles from "../SignIn/SignIn.module.css";
 import googleIcon from "../../assets/icons/google.svg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
+import { useUser } from '../../store/UserContext'; 
 
 function SignUp() {
   const url = useCloudinaryImage("15256_atn3ju").url;
   const navigate = useNavigate();
   const [error, setError] = React.useState(null);
+  const { setUser } = useUser();
 
   const handleSignUp = (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
     
-    fetch("/sign-up", {
+    fetch("/signUp", {
       method: "POST",
       body: data,
     })
-      .then((response) => {
+      .then(async (response) => {
         if (response.ok) {
+          const data = await response.json();
+          setUser(data.user);
+          localStorage.setItem("token", data.token);
           navigate("/dashboard");
         } else {
           setError(response.message);          
@@ -39,7 +44,7 @@ function SignUp() {
           backgroundImage: `url('${url}')`,
         }}
       />
-      <div className="w-full lg:w-[60%] bg-light-green p-[10%] lg:p-[5%] mt-[5%] md:mt-[10%] rounded-[40px] flex flex-col gap-5 relative z-2">
+      <div className="w-full lg:w-[60%] bg-light-green p-[10%] lg:p-[5%] mt-[5%] rounded-[40px] flex flex-col gap-5 relative z-2">
         <div>
           <p className="mb-5">
             Welcome to <span className="font-bold">GREENGROW</span>
@@ -88,7 +93,7 @@ function SignUp() {
               <Button text="Register" type="submit" />
            
           </form>
-          <span className="m-0 block form-divider w-full">or</span>
+          {/* <span className="m-0 block form-divider w-full">or</span>
           <Button
             text="Sign up with Google"
             bgColor="beige"
@@ -96,7 +101,7 @@ function SignUp() {
             icon={googleIcon}
             className="gap-1 lg:w-[100%] "
             
-          />
+          /> */}
         </div>
         <div className="text-right">
           <p className="text-sm">Already have an account?</p>
