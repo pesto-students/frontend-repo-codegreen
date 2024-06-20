@@ -22,6 +22,9 @@ module.exports = {
             height : 'auto',
           },
         },
+      borderRadius: {
+        '4xl': '2.5rem',
+        '5xl': '3rem'
       }
     },
     colors: {
