@@ -21,7 +21,8 @@ module.exports = {
             opacity: 1,
             height : 'auto',
           },
-        },
+        }
+      },
       borderRadius: {
         '4xl': '2.5rem',
         '5xl': '3rem'
@@ -42,4 +43,4 @@ module.exports = {
   plugins: [
     require('@tailwindcss/forms'),
   ],
-};
+}
