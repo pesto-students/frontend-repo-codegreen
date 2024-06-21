@@ -41,8 +41,8 @@ function Dashboard() {
     },
   ];
   return (
-    <div className={styles.dashboardContainer}>
-      <div className={styles.profileSection}>
+    <div className="w-full flex flex-col md:flex-row">
+      <div className="flex justify-between items-center md:flex-col w-full p-4 border-b-darkest-green border-b-2 md:w-2/6 md:border-b-0 md:border-r-2 md:mr-8">
         <div className={styles.userProfile}>
           <img src={UserIcon} alt="User Icon" className={styles.userIcon} />
         </div>
@@ -57,7 +57,7 @@ function Dashboard() {
         </div>
         <img src={treeLogo} alt="tree-logo" className={styles.treeImg} />
       </div>
-      <div className={styles.dashWrapper}>
+      <div className="w-full">
         <div>
           <p className={styles.greetingTxt}>
             Hey [Username], good to have you back!
@@ -73,20 +73,20 @@ function Dashboard() {
         </div>
         <div className={styles.saplingsSection}>
           <div className={styles.greetingTxt}>Your previous sapling logs</div>
-          <div className={styles.saplingsWrapper}>
+          <div className="flex flex-col md:grid grid-cols-2 gap-4 mt-4">
             {saplings.map((sapling) => {
               return (
-                <div className={styles.spBox}>
-                  <div className={styles.spStatus}>{sapling.status}</div>
-                  <img src={sapling.imgSrc} className={styles.spImg} />
-                  <div className={styles.spInfo}>
+                <div className="bg-light-green relative rounded-tr-4xl rounded-bl-4xl flex flex-row justify-center mb-8 md:mb-6">
+                  <div className="absolute top-[-15px] bg-dark-green text-white font-semibold text-sm rounded-3xl pl-3 pr-3 pt-2 pb-2 md:text-base">{sapling.status}</div>
+                  <img src={sapling.imgSrc} className="w-2/6 h-3/6 rounded-lg m-3 mt-10" />
+                  <div className="flex flex-col mt-8 ml-4 mr-6">
                     <div className={styles.spName}>{sapling.name}</div>
                     <div className={styles.spDate}>Date : {sapling.date}</div>
                     <div className={styles.spLocation}>
                       Location : {sapling.location}
                     </div>
                     <div >
-                      <button
+                    <button
                         className={styles.addUpBtn}
                         style={{
                           color: "auto",
