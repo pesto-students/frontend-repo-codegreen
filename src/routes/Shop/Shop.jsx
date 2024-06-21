@@ -1,5 +1,6 @@
 import React from "react";
 import Coupon from "./Coupon";
+import { useUser } from "../../store/UserContext";
 
 function Shop() {
   const coupons = [
@@ -65,16 +66,16 @@ function Shop() {
     },
   ];
   
-
+  const { user } = useUser();
   return (
     <div className="flex flex-col w-full pt-[8%] md:pt-[5%] gap-10">
-      <h1 className="font-semibold mt-5 mb-5">
-        Planting trees is rewarding! Grab your favourite coupons. You have 100
-        coins.
+      <h1 className="font-semibold mt-5 ">
+        {`Planting trees is rewarding! Grab your favourite coupons. You have ${ user.coins } 
+        coins.`}
       </h1>
       <div className="md:grid grid-cols-3 gap-10">
         {coupons.map((coupon, index) => (
-          <Coupon coupon={coupon} key={`coupon-${index}`}/>
+          <Coupon coupon={coupon} key={`coupon-${index}`} user={user}/>
         ))}
       </div>
     </div>

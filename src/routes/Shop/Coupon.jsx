@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
 
-function Coupon({ coupon }) {
+function Coupon({ coupon, user }) {
   const [showCouponCode, setShowCouponCode] = useState(false);
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
-
+ 
   const handleCopyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
     setCopiedToClipboard(true);
@@ -19,8 +19,8 @@ function Coupon({ coupon }) {
   }, [copiedToClipboard]);
 
   return (
-    <div className="bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-row gap-4 p-6 mb-6 md:mb-0 items-center relative">
-      <div className="flex flex-col justify-start items-center gap-3 w-1/2">
+    <div className={`bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-col lg:flex-row gap-4 pb-20 p-6 lg:pb-6 mb-6 md:mb-0 items-center relative ${user.coins >= coupon.coinsNeeded && 'grayscale'}`}>
+      <div className="flex flex-col justify-start items-center gap-3 w-full lg:w-1/2">
       <a title="Visit website" href={coupon.url} target="_blank" rel="noreferrer">
         <img
           src={coupon.image}
@@ -30,13 +30,13 @@ function Coupon({ coupon }) {
         </a>
         <h2 className="text-lg font-bold">{coupon.title}</h2>
       </div>
-      <div className="flex flex-col gap-2 w-1/2">
+      <div className="flex flex-col gap-2 w-full lg:w-1/2">
         <p className="w-55 overflow-ellipsis text-sm">
           {coupon.description}
         </p>
         <span className="font-bold text-base">{coupon.coinsNeeded} coins</span>
 
-        {showCouponCode ? (
+        {user.coins < coupon.coinsNeeded && (showCouponCode ? (
           <div className="w-full max-w-[16rem]">
             <div className="relative">
               <span
@@ -88,10 +88,10 @@ function Coupon({ coupon }) {
         ) : (
           <Button
             text="Redeem"
-            className="text-base p-4 md:w-3/5 md:max-lg:w-4/5 justify-self-end"
+            className={"text-base p-4 md:w-3/5 md:max-lg:w-4/5 justify-self-end"}
             onClick={() => setShowCouponCode(true)}
           />
-        )}
+        ))}
       </div>
       <a className="absolute bottom-5 right-5" title="Visit website" href={coupon.url} target="_blank" rel="noreferrer">
         <svg
