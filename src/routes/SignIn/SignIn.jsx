@@ -25,7 +25,9 @@ function SignIn() {
           });
           const data = response.data;
           setUser(data.user);
+          localStorage.setItem('user', JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
+          
           navigate("/dashboard");
         } catch (error) {
           setError(error.message);
