@@ -4,12 +4,8 @@ import { NavLink } from "react-router-dom";
 import { useUser } from "../../../store/UserContext";
 
 function MenuItems() {
-  const { user, setUser } = useUser();
+  const { user, signOut } = useUser();
 
-  const handleLogOut = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-  }
   return (
     <nav className="w-full">
       <ul className="flex flex-col md:flex-row justify-end items-center gap-8 md:gap-6 list-none">
@@ -56,7 +52,7 @@ function MenuItems() {
                 isActive ? "font-bold text-orange" : ""
               }
             >
-              <Button text="Log-out" bgColor="darkest-green" onClick={handleLogOut} />
+              <Button text="Log-out" bgColor="darkest-green" onClick={signOut} />
             </NavLink>
           </li>
         ) : (
@@ -77,3 +73,4 @@ function MenuItems() {
 }
 
 export default MenuItems;
+
