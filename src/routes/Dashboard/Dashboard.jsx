@@ -54,7 +54,7 @@ function Dashboard() {
     },
   ];
   return (
-    <div className="w-full flex flex-col md:flex-row">
+    <div className="w-full flex flex-col md:flex-row pt-[8%] md:pt-[5%]">
       <div className="flex justify-between items-center md:flex-col w-full p-4 border-b-darkest-green border-b-2 md:w-2/6 md:border-b-0 md:border-r-2 md:mr-8">
         <div className={styles.userProfile}>
           <img src={UserIcon} alt="User Icon" className={styles.userIcon} />
