@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserIcon from "../../assets/icons/Avatar.svg";
 import styles from "./Dashboard.module.css";
 import Button from "../../components/Button/Button";
 import rightArrow from "../../assets/icons/arrow-square-right.svg";
 import editIcon from "../../assets/icons/editIcon.svg";
 import treeLogo from "../../assets/images/tree-logo.svg"
+import api from "../../hooks/axiosConfig"
 function Dashboard() {
+  const [plants, setPLants] = useState([])
+  useEffect(() => {
+    api.get('api/plantation/')
+    .then(response => {
+      console.log(response.data);
+      
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    })
+  }, []
+  )
   const saplings = [
     {
       status: "First Leaves",
