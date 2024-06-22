@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import closeIcon from "../../assets/icons/close.png";
+import { useUser } from "../../store/UserContext";
 
 import Step1 from "./Step1";
 import Step2 from "./Step2";
@@ -9,6 +10,7 @@ function UploadNewLogForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [images, setImages] = useState([]);
   const [details, setDetails] = useState({});
+  const { isModalOpen, setIsModalOpen } = useUser();
 
   const getImages = (images) => {
     setCurrentStep(2);
@@ -45,12 +47,16 @@ function UploadNewLogForm() {
   return (
     <div
       id="upload-new-log"
-      className="absolute bg-darkest-green w-full py-10 left-0 top-0 flex items-center justify-center"
+      className="h-full absolute bg-darkest-green w-full py-10 left-0 top-0 flex items-center justify-center"
     >
       <img
         src={closeIcon}
         alt="Close Pop-up and go back"
         className="absolute w-10 h-10 right-10 top-10"
+        onClick={() => {
+          setIsModalOpen(false)
+        }}
+
       />
       <div className="bg-light-green rounded-xl w-[80vw] min-h-[80vh] p-8 md:p-20 flex flex-col items-center gap-10 ">
         <div

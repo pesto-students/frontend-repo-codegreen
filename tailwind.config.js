@@ -25,7 +25,8 @@ module.exports = {
       },
       borderRadius: {
         '4xl': '2.5rem',
-        '5xl': '3rem'
+        '5xl': '3rem',
+        'mxxl': '50%'
       }
     },
     colors: {
