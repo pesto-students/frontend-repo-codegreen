@@ -110,6 +110,7 @@ function Step2(props) {
                 >
                 <input
                     type="checkbox"
+                    id={`milestone-${index}`}
                     value={milestone.name}
                     className="hidden"
                     required=""
