@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import closeIcon from "../../assets/icons/close.png";
+import Button from "../../components/Button/Button";
+import { useUser } from "../../store/UserContext";
+import axios from "../../hooks/axiosConfig";
 
-import Button from "../Button/Button";
-
-function UploadNewLogForm() {
+function CreatePost({onClose}) {
   const [images, setImages] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user } = useUser();
 
-  const getImages = (images) => {
-    setImages(images);
-  };
+ 
   const handleImageUpload = (e) => {
     let files = e.target.files;
     let filteredFiles = Array.from(files).filter(
@@ -26,8 +26,23 @@ function UploadNewLogForm() {
     setImages(images.filter((img) => img !== image));
   };
 
-  //send images to server
-
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const newPost = Object.fromEntries(formData.entries());
+    newPost.author = user._id;
+    const combinedData = new FormData();
+    combinedData.append("details", JSON.stringify(newPost));
+    combinedData.append("images", images);
+    try {
+        const response = await axios.post("api/forum/create", combinedData);
+        if(response.status === 200){
+          onClose();
+        }    
+      } catch (error) {
+        setErrorMessage(error.response.data.message);        
+      }
+  }
 
   return (
     <div
@@ -37,23 +52,25 @@ function UploadNewLogForm() {
       <img
         src={closeIcon}
         alt="Close Pop-up and go back"
-        className="absolute w-10 h-10 right-10 top-10"
+        className="absolute w-10 h-10 right-10 top-10 cursor-pointer"
+        onClick={onClose}
       />
       <div className="bg-light-green rounded-xl w-[80vw] min-h-[80vh] p-8 md:p-20 flex flex-col items-center gap-10">
         <h1 className="font-semibold text-left text-3xl md:text-5xl w-full">
           Create Post
         </h1>
 
-        <form className="mx-0 my-[5%] w-full flex flex-col md:flex-col">
+        <form className="mx-0 my-[5%] w-full flex flex-col md:flex-col" onSubmit={e => handleSubmit(e)}>
           <label
-            htmlFor="tree-name"
+            htmlFor="title"
             className="block w-full md:text-base mb-6 font-medium"
           >
             Title
             <input
-              id="title-name"
+              id="title"
               type="text"
               className="form-input input-style"
+              name="title"
             />
           </label>
           <label
@@ -64,7 +81,8 @@ function UploadNewLogForm() {
             <textarea
               id="description"
               type="text"
-              className="form-textarea bg-beige border-none rounded-sm min-h-36"
+              name="description"
+              className='border-0 focus:ring-0 w-full focus:border-2 focus:border-orange' rows='5' placeholder='Write your response...'
             ></textarea>
           </label>
 
@@ -72,7 +90,7 @@ function UploadNewLogForm() {
             <Button
               text="Create"
               className="w-2/5 md:w-[40%]"
-              //   onClick={handleSubmit}
+              
             />
 
             <div className="flex items-center gap-3">
@@ -114,6 +132,9 @@ function UploadNewLogForm() {
               <div className="">Upload photos</div>
             </div>
           </div>
+          <p id="error" className="text-sm text-red font-semibold">
+              {errorMessage}
+            </p>
           <div className="w-full flex flex-row gap-4 mt-6 ml-2">
             {images.map((image, index) => (
               <div className="relative" key={"image" + index}>
@@ -137,4 +158,4 @@ function UploadNewLogForm() {
   );
 }
 
-export default UploadNewLogForm;
+export default CreatePost;

@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import backIcon from "../../assets/icons/backButton.png"
 import Button from "../../components/Button/Button";
 import postIconBullet from "../../assets/icons/postBulletIcon.png"
-import upvoteIcon from "../../assets/icons/upvoteIcon.png"
-import downvoteIcon from "../../assets/icons/downvoteIcon.png"
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import CreatePost from "./CreatePost";
 
 const posts = [
   {
@@ -62,45 +61,51 @@ const posts = [
 ]
 
 function PostsByCategory() {
-  const {category} = useParams();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  return <div className="flex flex-col w-full gap-10 pt-[8%] md:pt-[5%]" >
-    <Link to="/discuss" >
-    <img src={backIcon} alt="" className="w-[40px]"/>
-    </Link>
-  <div className="flex flex-row justify-between items-center">
-    <h1 className="font-bold text-3xl">General</h1>
-    <Button text="Create Post" className="!w-[20%]"/>
-    </div>
-
-    <div id="posts" className="w-full">
-        <table className="table-fixed w-full">
-          <thead className="text-gray text-sm md:text-base">
-            <tr>
-              <th className="w-1/2 py-2">posts</th>
-              <th className="py-2 text-center md:text-left">answers</th>
-              <th className="py-2">votes</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {posts.map((post) => {
-              return (
-                <tr className="text-sm md:text-base">
-                  <td className="flex gap-4 items-center font-bold py-4 ">
-                    <img src={postIconBullet} className="w-[30px] md:w-auto"/>
-                    <Link to={`/discuss/${category}/${post.id}`}>{post.title}</Link>
-                  </td>
-                  <td className="text-center md:text-left">{post.answersCount}</td>
-                  <td><div className="flex flex-nowrap gap-2 items-center "> <img src={upvoteIcon} alt="Upvotes" className="w-4 md:w-8"/>{post.votes.upvotes} <img src={downvoteIcon} alt="Downvotes" className="w-4 md:w-8"/>{post.votes.downvotes}</div></td>
+  return (
+    <>
+    {
+      isModalOpen ? <CreatePost onClose={() => setIsModalOpen(false)}/> : <div className="flex flex-col w-full gap-10 pt-[8%] md:pt-[5%]" >
+        <Link to="/discuss" >
+        <img src={backIcon} alt="" className="w-[40px]"/>
+        </Link>
+      <div className="flex flex-row justify-between items-center">
+        <h1 className="font-bold text-3xl">Posts</h1>
+        <Button text="Create Post" className="!w-[20%]" onClick={() => setIsModalOpen(true)}/>
+        </div>
+    
+        <div id="posts" className="w-full">
+            <table className="table-fixed w-full">
+              <thead className="text-gray text-sm md:text-base">
+                <tr>
+                  <th className="w-1/2 py-2">post</th>
+                  <th className="py-2 text-center md:text-left">answers</th>                  
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              </thead>
+    
+              <tbody>
+                {posts.map((post) => {
+                  return (
+                    <tr className="text-sm md:text-base">
+                      <td className="flex gap-4 items-center font-bold py-4 ">
+                        <img src={postIconBullet} className="w-[30px] md:w-auto"/>
+                        <Link to={`/discuss/${post.id}`}>{post.title}</Link>
+                      </td>
+                      <td className="text-center md:text-left">{post.answersCount}</td>
+                      
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+    
       </div>
-
-  </div>;
+    }
+    </>
+  )
+  
 }
 
 export default PostsByCategory;

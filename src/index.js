@@ -4,7 +4,6 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RootLayout from "./components/RootLayout";
-import Forum from "./routes/Forum/Forum";
 import Shop from "./routes/Shop/Shop";
 import Dashboard from "./routes/Dashboard/Dashboard";
 import ErrorPage from "./routes/Error/ErrorPage";
@@ -31,14 +30,10 @@ const router = createBrowserRouter([
       },
       {
         path: "/discuss",
-        element: <Forum />,        
+        element: <PostsByCategory />,        
       },
       {
-        path : "/discuss/:category",
-        element : <PostsByCategory />
-      },
-      {
-        path : 'discuss/:category/:id',
+        path : 'discuss/:id',
            element : <Post />
       },
       {
