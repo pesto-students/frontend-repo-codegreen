@@ -5,6 +5,7 @@ import styles from "./SignIn.module.css";
 import googleIcon from "../../assets/icons/google.svg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 import { useUser } from '../../store/UserContext'; 
+import axios from "../../hooks/axiosConfig";
 
 
 function SignIn() {
@@ -15,38 +16,23 @@ function SignIn() {
   const navigate = useNavigate();
   const { setUser } = useUser();
 
-  const handleSignIn = (e) => {   
+  const handleSignIn = async (e) => {   
       e.preventDefault();
-      try{
-        fetch("/signIn", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ 
-            email : emailRef.current.value, 
-            password : passwordRef.current.value}),
-        })
-          .then(async (response) => {
-            if (response.ok) {
-              const data = await response.json();
-              setUser(data.user);
-              localStorage.setItem("token", data.token);
-              navigate("/dashboard");
-            } else {
-              setError(response.message);
-              emailRef.current.value = "";
-              passwordRef.current.value = "";
-            }
-          })
-          .catch((error) => {
-            setError(error.message);
-          }); 
-      }
-        catch(error){
+      try {
+          const response = await axios.post("api/user/signIn", {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+          });
+          const data = response.data;
+          setUser(data.user);
+          localStorage.setItem("token", data.token);
+          navigate("/dashboard");
+        } catch (error) {
           setError(error.message);
-
+          emailRef.current.value = "";
+          passwordRef.current.value = "";
         }
+    
     }
   
 
