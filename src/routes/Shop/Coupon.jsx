@@ -19,7 +19,7 @@ function Coupon({ coupon, user }) {
   }, [copiedToClipboard]);
 
   return (
-    <div className={`bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-col lg:flex-row gap-4 pb-20 p-6 lg:pb-6 mb-6 md:mb-0 items-center relative ${user.coins >= coupon.coinsNeeded && 'grayscale'}`}>
+    <div className={`bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-col lg:flex-row gap-4 pb-20 p-6 lg:pb-6 mb-6 md:mb-0 items-center relative ${user.points >= coupon.coinsNeeded && 'grayscale'}`}>
       <div className="flex flex-col justify-start items-center gap-3 w-full lg:w-1/2">
       <a title="Visit website" href={coupon.url} target="_blank" rel="noreferrer">
         <img
@@ -36,7 +36,7 @@ function Coupon({ coupon, user }) {
         </p>
         <span className="font-bold text-base">{coupon.coinsNeeded} coins</span>
 
-        {user.coins < coupon.coinsNeeded && (showCouponCode ? (
+        {user.points < coupon.coinsNeeded && (showCouponCode ? (
           <div className="w-full max-w-[16rem]">
             <div className="relative">
               <span
