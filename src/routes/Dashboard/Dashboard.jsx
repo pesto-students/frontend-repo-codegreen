@@ -84,7 +84,7 @@ function Dashboard() {
         <div className={styles.addNewBtnSection}>
           <Button
             className={styles.addSapplingBtn}
-            text="Add new sappling log"
+            text="Add new sapling log"
             icon={rightArrow}
             isFullWidth={true}
             onClick={() => {
