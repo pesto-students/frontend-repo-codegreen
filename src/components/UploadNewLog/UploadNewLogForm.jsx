@@ -4,7 +4,7 @@ import { useUser } from "../../store/UserContext";
 import Step1 from "./Step1";
 import Step2 from "./Step2";
 import { useNavigate } from "react-router-dom";
-import axios from "../../hooks/axiosConfig";
+import api from "../../hooks/axiosConfig";
 
 
 function UploadNewLogForm() {
@@ -17,7 +17,7 @@ function UploadNewLogForm() {
   useEffect(() => {
   async function getMilestones() {
     try {
-      const response = await axios.get(`/api/plantation/milestones`);
+      const response = await api.get(`/api/plantation/milestones`);
       const milestones = response.data;
       setMilestones(milestones);
     } catch (error) {
@@ -43,11 +43,14 @@ function UploadNewLogForm() {
     const formData = new FormData();
     formData.append("image", images[0]);
     formData.append("details", JSON.stringify(details)); 
+    console.log("formData", images, details)
     try {
-        const response = await axios.post(
+        const response = await api.post(
           `/api/plantation/createNewPlantation`, formData
         );
         if(response.status === 200){
+          // console.log("200 success", response.data )
+          setIsModalOpen(false)
           navigate("/dashboard");
         }        
       } catch (error) {

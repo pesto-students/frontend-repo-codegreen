@@ -8,6 +8,7 @@ export const useUser = () => useContext(UserContext);
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPlant, setCurrentPlant] = useState()
 
   const signOut = () => {
     setUser(null);
@@ -24,7 +25,7 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser, isModalOpen, setIsModalOpen, signOut }}>
+    <UserContext.Provider value={{ user, setUser, isModalOpen, setIsModalOpen, signOut, currentPlant, setCurrentPlant }}>
       {children}
     </UserContext.Provider>
   );

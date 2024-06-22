@@ -10,7 +10,7 @@ import UploadNewLogForm from "../../components/UploadNewLog/UploadNewLogForm";
 import { useUser } from "../../store/UserContext";
 function Dashboard() {
   const [saplings, setSaplings] = useState([])
-  const { user, isModalOpen, setIsModalOpen } = useUser();
+  const { user, isModalOpen, setIsModalOpen, setCurrentPlant } = useUser();
   const dateoOtions = { year: 'numeric', month: 'long', day: 'numeric' };
   useEffect(() => {
     api.get('api/plantation/')
@@ -65,7 +65,7 @@ function Dashboard() {
               return (
                 <div className="bg-light-green relative rounded-tr-4xl rounded-bl-4xl flex flex-row justify-center mb-2 md:mb-6" key={index}>
                   {/* <div className="absolute top-[-15px] bg-dark-green text-white font-semibold text-sm rounded-3xl pl-3 pr-3 pt-2 pb-2 md:text-base">{sapling.status}</div> */}
-                  <img src={sapling?.cloudinaryUrls[0]} className="w-2/6 h-6/6 md:h-2/6 rounded-lg m-3 mb-6 ml-6 md:mb-3 mt-8" />
+                  <img src={sapling?.cloudinaryUrls[0]} className="w-2/6 h-6/6 md:h-4/6 rounded-lg m-3 mb-6 ml-6 md:mb-3 mt-8" />
                   <div className="flex flex-col mt-4 ml-4 mr-6">
                     <div className={styles.spName}>{sapling?.treeName}</div>
                     <div className={styles.spDate}>Date : { new Date(sapling?.plantationDate).toLocaleDateString('en-GB', dateoOtions)}</div>
@@ -79,7 +79,7 @@ function Dashboard() {
                           color: "auto",
                           backgroundColor:"#e48c3c",
                         }}
-                        onClick={() => console.log("clicked")}
+                        onClick={() => {setIsModalOpen(true); setCurrentPlant(sapling)}}
                       >
                         Add update {editIcon  && <img src={editIcon} />}
                       </button>

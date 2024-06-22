@@ -1,19 +1,34 @@
 import React, { useState, useRef, useEffect } from "react";
 import Button from "../Button/Button";
-import axios from "../../hooks/axiosConfig";
+import api from "../../hooks/axiosConfig";
+import { useUser } from "../../store/UserContext";
 
 
 function Step2(props) {
   const [location, setLocation] = useState("");
+  const { currentPlant } = useUser();
+  const [selectedMilestones, setSelectedMilestones] = useState([]);
   
   useEffect(() => {
+    // console.log('current plan 2', currentPlant)
+    if (currentPlant) {
+      // Set initial values from currentPlant if available
+      logDetails.treeName.current.value = currentPlant.treeName || "";
+      // setLocation(currentPlant.location || "");
+      logDetails.date.current.value = currentPlant.plantationDate
+        ? new Date(currentPlant.plantationDate).toISOString().split('T')[0]
+        : "";
+        const milestoneIds = currentPlant.milestones.map(milestone => milestone._id);
+        setSelectedMilestones(milestoneIds);
+    }
+    // console.log("selected", selectedMilestones)
 
      async function success(position) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
       try {
-        const response = await axios.get(
+        const response = await api.get(
           `/api/utils/getAddress/${latitude}/${longitude}`
         );
         const data = response.data;
@@ -29,7 +44,7 @@ function Step2(props) {
     }
   }, []);
 
-  const [selectedMilestones, setSelectedMilestones] = useState([]);
+
   const logDetails = {
     treeName: useRef(""),
     date: useRef(""),
@@ -45,7 +60,8 @@ function Step2(props) {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     const details = {
       treeName: logDetails.treeName.current.value,
       location: location,
