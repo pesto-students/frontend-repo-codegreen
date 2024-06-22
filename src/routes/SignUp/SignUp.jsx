@@ -5,6 +5,7 @@ import styles from "../SignIn/SignIn.module.css";
 import googleIcon from "../../assets/icons/google.svg";
 import { useCloudinaryImage } from "../../hooks/useCloudinaryImage";
 import { useUser } from '../../store/UserContext'; 
+import axios from "../../hooks/axiosConfig";
 
 function SignUp() {
   const url = useCloudinaryImage("15256_atn3ju").url;
@@ -12,28 +13,19 @@ function SignUp() {
   const [error, setError] = React.useState(null);
   const { setUser } = useUser();
 
-  const handleSignUp = (event) => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    
-    fetch("/signUp", {
-      method: "POST",
-      body: data,
-    })
-      .then(async (response) => {
-        if (response.ok) {
-          const data = await response.json();
-          setUser(data.user);
-          localStorage.setItem("token", data.token);
-          navigate("/dashboard");
-        } else {
-          setError(response.message);          
-        }
-      })
-      .catch((error) => {
-        setError(error.message);
-      }); 
+    const userDetails = Object.fromEntries(formData.entries());
+    try {
+        const response = await axios.post("api/user/signUp", userDetails);
+        const data = response.data;
+        setUser(data.user);
+        localStorage.setItem("token", data.token);
+        navigate("/dashboard");
+      } catch (error) {
+        setError(error.message);        
+      }
   }
 
   return (
