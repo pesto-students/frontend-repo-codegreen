@@ -1,16 +1,20 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import Button from "../../Button/Button";
 import { NavLink } from "react-router-dom";
 import { useUser } from "../../../store/UserContext";
 
 function MenuItems() {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
 
+  const handleLogOut = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  }
   return (
     <nav className="w-full">
       <ul className="flex flex-col md:flex-row justify-end items-center gap-8 md:gap-6 list-none">
-      {/*   {user && (
-          <> */}
+        {user && (
+          <> 
           <li>
             <NavLink
               to="/discuss"
@@ -31,10 +35,6 @@ function MenuItems() {
               Shop
             </NavLink>
           </li>
-     {/*      </>
-        )} */}
-       
-        {user ?  (
           <li>
             <NavLink
               to="/dashboard"
@@ -43,6 +43,20 @@ function MenuItems() {
               }
             >
              Dashboard
+            </NavLink>
+          </li>
+       </>
+        )}
+       
+        {user ?  (
+          <li>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "font-bold text-orange" : ""
+              }
+            >
+              <Button text="Log-out" bgColor="darkest-green" onClick={handleLogOut} />
             </NavLink>
           </li>
         ) : (
