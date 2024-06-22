@@ -1,29 +1,26 @@
 import React, { useState, useRef, useEffect } from "react";
 import Button from "../Button/Button";
+import axios from "../../hooks/axiosConfig";
 
-const milestones = {
-  early: ["new leaves", "branching"],
-  mid: ["pruning", "fertilizing", "pest control"],
-  mature: ["height 4ft", "flowering", "fruiting"],
-};
 
 function Step2(props) {
   const [location, setLocation] = useState("");
-
+  
   useEffect(() => {
-    async function success(position) {
+
+     async function success(position) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
-     
-      fetch(
-        `/api/location?latitude=${latitude}&longitude=${longitude}`
-      )
-        .then(function (response) {
-          setLocation(response);
-        })
-        .catch(function (err) {
-          console.warn("Something went wrong.", err);
-        });
+
+      try {
+        const response = await axios.get(
+          `/api/utils/getAddress/${latitude}/${longitude}`
+        );
+        const data = response.data;
+        setLocation(data.address);
+      } catch (error) {
+        console.log(error.message);
+      }
     }
     if (!navigator.geolocation) {
       console.log("Geolocation is not supported by your browser");
@@ -35,17 +32,15 @@ function Step2(props) {
   const [selectedMilestones, setSelectedMilestones] = useState([]);
   const logDetails = {
     treeName: useRef(""),
-    location: useRef(""),
     date: useRef(""),
-    postOnForum: useRef(false),
   };
 
-  const handleMilestoneSelection = (milestone) => {
+  const handleMilestoneSelection = (milestoneId) => {
     setSelectedMilestones((prev) => {
-      if (prev.includes(milestone)) {
-        return prev.filter((item) => item !== milestone);
+      if (prev.includes(milestoneId)) {
+        return prev.filter((id) => id !== milestoneId);
       } else {
-        return [...prev, milestone];
+        return [...prev, milestoneId];
       }
     });
   };
@@ -53,9 +48,8 @@ function Step2(props) {
   const handleSubmit = () => {
     const details = {
       treeName: logDetails.treeName.current.value,
-      location: logDetails.location.current.value,
+      location: location,
       date: logDetails.date.current.value,
-      postOnForum: logDetails.postOnForum.current.checked,
       milestones: selectedMilestones,
     };
     props.onDetailsSubmit(details);
@@ -89,6 +83,7 @@ function Step2(props) {
             type="text"
             className="form-input input-style"
             value={location}
+            readOnly
           />
         </label>
         <label htmlFor="date" className="block w-full xl:w-[30%] md:text-base">
@@ -107,51 +102,33 @@ function Step2(props) {
           </legend>
 
           <ul className="flex flex-col lg:flex-row w-full gap-6 md:grid-cols-3">
-            {Object.keys(milestones).map((stage) => {
+           {props.milestones.map((milestone, index) => {
               return (
-                <li key={stage} className="flex flex-row flex-wrap gap-3">
-                  <span className="w-full block capitalize font-semibold md:text-base">
-                    {stage}
-                  </span>
-
-                  {milestones[stage].map((milestone) => {
-                    return (
-                      <div key={milestone}>
-                        <input
-                          type="checkbox"
-                          id={milestone}
-                          value={milestone}
-                          className="hidden"
-                          required=""
-                          checked={selectedMilestones.includes(milestone)}
-                          onChange={() => handleMilestoneSelection(milestone)}
-                        />
-                        <label
-                          htmlFor={milestone}
-                          className="flex items-center justify-between  p-3 bg-dark-green text-white rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
-                        >
-                          <div className="inline">
-                            <div className="w-full text-sm">{milestone}</div>
-                          </div>
-                        </label>
-                      </div>
-                    );
-                  })}
+                <li
+                  key={`milestone-${index}`}
+                  className="flex flex-row flex-wrap gap-3"
+                >
+                <input
+                    type="checkbox"
+                    value={milestone.name}
+                    className="hidden"
+                    required=""
+                    checked={selectedMilestones.includes(milestone.id)}
+                    onChange={() => handleMilestoneSelection(milestone.id)}
+                  />
+                  <label
+                    htmlFor={`milestone-${index}`}
+                    className="flex items-center justify-between  p-3 bg-dark-green text-white rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-blue-600 hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  >
+                    <div className="inline">
+                      <div className="w-full text-sm">{milestone.name}</div>
+                    </div>
+                  </label>
                 </li>
-              );
+            );
             })}
           </ul>
         </fieldset>
-
-        <label htmlFor="post-forum" className="block w-full md:text-base">
-          <input
-            id="post-forum"
-            type="checkbox"
-            ref={logDetails.postOnForum}
-            className="mr-2 rounded border-0 text-orange shadow-sm focus:border-orange focus:ring focus:ring-offset-0 focus:ring-orange focus:ring-opacity-50"
-          />
-          Post this Log on community forum
-        </label>
 
         <div className="w-full flex flex-row justify-end">
           <Button
