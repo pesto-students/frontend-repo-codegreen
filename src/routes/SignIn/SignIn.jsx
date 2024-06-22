@@ -30,7 +30,7 @@ function SignIn() {
           
           navigate("/dashboard");
         } catch (error) {
-          setError(error.message);
+          setError(error.response.data.message);
           emailRef.current.value = "";
           passwordRef.current.value = "";
         }
