@@ -70,7 +70,7 @@ function Shop() {
   return (
     <div className="flex flex-col w-full pt-[8%] md:pt-[5%] gap-10">
       <h1 className="font-semibold mt-5 ">
-        {`Planting trees is rewarding! Grab your favourite coupons. You have ${ user.coins } 
+        {`Planting trees is rewarding! Grab your favourite coupons. You have ${ user.points } 
         coins.`}
       </h1>
       <div className="md:grid grid-cols-3 gap-10">
