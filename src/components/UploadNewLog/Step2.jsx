@@ -36,7 +36,7 @@ function Step2(props) {
   };
 
   const handleMilestoneSelection = (milestoneId) => {
-    setSelectedMilestones((prev) => {
+      setSelectedMilestones((prev) => {
       if (prev.includes(milestoneId)) {
         return prev.filter((id) => id !== milestoneId);
       } else {
@@ -114,8 +114,8 @@ function Step2(props) {
                     value={milestone.name}
                     className="hidden"
                     required=""
-                    checked={selectedMilestones.includes(milestone.id)}
-                    onChange={() => handleMilestoneSelection(milestone.id)}
+                    checked={selectedMilestones.includes(milestone._id)}
+                    onChange={() => handleMilestoneSelection(milestone._id)}
                   />
                   <label
                     htmlFor={`milestone-${index}`}
