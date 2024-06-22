@@ -10,7 +10,7 @@ import UploadNewLogForm from "../../components/UploadNewLog/UploadNewLogForm";
 import { useUser } from "../../store/UserContext";
 function Dashboard() {
   const [plants, setPLants] = useState([])
-  const { isModalOpen, setIsModalOpen } = useUser();
+  const { user, isModalOpen, setIsModalOpen } = useUser();
   useEffect(() => {
     api.get('api/plantation/')
     .then(response => {
@@ -59,18 +59,18 @@ function Dashboard() {
   return (
     <>
     {isModalOpen ? <UploadNewLogForm /> :
-    <div className="w-full h-full flex flex-col md:flex-row">
+    <div className="w-full h-full flex flex-col md:flex-row pt-[8%] md:pt-[5%]">
       <div className="flex justify-between items-center md:flex-col w-full p-4 border-b-darkest-green border-b-2 md:w-2/6 xl:w-1/5 md:mt-6 md:mb-6 md:border-b-0 md:border-r-2 md:mr-8">
         <div className="relative bg-light-green rounded-4xl w-16 h-16 md:w-36 md:h-36 md:rounded-mxxl">
           <img src={UserIcon} alt="User Icon" className="absolute top-3 w-24 h-14 md:w-36 md:h-36 " />
         </div>
         <div className={styles.usernameWrppr}>
-          <div className="text-xl font-bold">John</div>
+          <div className="text-xl font-bold">{user.firstName}</div>
           <div className="text-sm font-semibold" >Edit Profile</div>
         </div>
         <div>
           <button text="100 Coins" className={styles.coinsBtn}>
-            100 Coins
+            {user.coins}
           </button>
         </div>
         <img src={treeLogo} alt="tree-logo" className="hidden md:block md:basis-1/2" />
@@ -78,7 +78,7 @@ function Dashboard() {
       <div className="w-full">
         <div>
           <p className={styles.greetingTxt}>
-            Hey [Username], good to have you back!
+            Hey {user.firstName}, good to have you back!
           </p>
         </div>
         <div className={styles.addNewBtnSection}>
