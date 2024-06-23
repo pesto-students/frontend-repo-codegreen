@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import backIcon from "../../assets/icons/backButton.png"
 import Button from './../../components/Button/Button';
@@ -7,16 +7,15 @@ import axios from "../../hooks/axiosConfig";
 function Post() {
     const { id } = useParams()
     const [postData, setPostData] = useState({})
+    const commentRef = React.useRef();
 
     useEffect(() => {
-      console.log("wqqwd");
       const getPost = async () => {
         try {
           const response = await axios.get(`api/forum/`);
           let data = response.data;
           data = data.filter(post => post._id === id)
           setPostData(data[0]);
-          console.log(data[0]);
         } catch (error) {
           console.log(error.message);
         }
@@ -25,6 +24,19 @@ function Post() {
     }, [id]);
 
     const [replyBoxVisible, setReplyBoxVisible] = useState(false);
+
+    const submitComment = async () => {
+      try {
+        const response = await axios.patch(`/api/forum/${id}`, { comments: [{
+        comment : commentRef.current.value,
+        author : postData.author._id,
+    }] });
+        let data = response.data;
+        setPostData(data);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
 
     return (
     <div className="flex flex-col w-full gap-5 pt-[8%] md:pt-[5%]">
@@ -56,9 +68,9 @@ function Post() {
       {
         replyBoxVisible && <div className='bg-white border-0 w-full lg:w-1/2 rounded-lg p-4 focus-within:ring-0 focus-within:border-2 border-orange animate-reveal-down'>
         <form>
-          <textarea name="reply" id="replyBox" className='border-0 focus:ring-0 w-full' rows='5' placeholder='Write your response...'></textarea>
+          <textarea name="reply" id="replyBox" className='border-0 focus:ring-0 w-full' rows='5' placeholder='Write your response...' ref={commentRef}></textarea>
           <div className='flex flex-row justify-end gap-2 mt-4 text-sm'>
-            <Button text="Post" className='!w-fit' bgColor='darkest-green'/>
+            <Button text="Post" className='!w-fit' bgColor='darkest-green' onClick={submitComment}/>
             <Button text="Cancel" className='!w-fit' bgColor='light-green' onClick={ () => setReplyBoxVisible(false)}/>
           </div>
         </form>
