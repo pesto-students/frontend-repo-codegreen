@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Button from "../../components/Button/Button";
+import { useUser } from "../../store/UserContext";
+import api from "../../hooks/axiosConfig"
 
 function Coupon({ coupon, user }) {
   const [showCouponCode, setShowCouponCode] = useState(false);
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
+  const { setUser } = useUser();
  
   const handleCopyToClipboard = (code) => {
     navigator.clipboard.writeText(code);
@@ -18,8 +21,29 @@ function Coupon({ coupon, user }) {
     return () => clearTimeout(timer);
   }, [copiedToClipboard]);
 
+  useEffect(() => {
+    
+    const editUserPoints = async () => {
+      try {
+        const response = await api.patch(
+          `api/user/editUser?reduceUserPoints=true`, { points: coupon.coinsNeeded }
+        );
+        const userData = response.data;
+        setUser(userData);
+        
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    if( showCouponCode) editUserPoints();
+  }, [showCouponCode]);
+
+  const handleRedeemClick = () => {
+    setShowCouponCode(true);
+  }
+
   return (
-    <div className={`bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-col lg:flex-row gap-4 pb-20 p-6 lg:pb-6 mb-6 md:mb-0 items-center relative ${user.points >= coupon.coinsNeeded && 'grayscale'}`}>
+    <div className={`bg-light-green border-sold rounded-tr-4xl rounded-bl-4xl flex flex-col lg:flex-row gap-4 pb-20 p-6 lg:pb-6 mb-6 md:mb-0 items-center relative ${user.points < coupon.coinsNeeded && 'grayscale'}`}>
       <div className="flex flex-col justify-start items-center gap-3 w-full lg:w-1/2">
       <a title="Visit website" href={coupon.url} target="_blank" rel="noreferrer">
         <img
@@ -36,7 +60,7 @@ function Coupon({ coupon, user }) {
         </p>
         <span className="font-bold text-base">{coupon.coinsNeeded} coins</span>
 
-        {user.points < coupon.coinsNeeded && (showCouponCode ? (
+        {user.points >= coupon.coinsNeeded && (showCouponCode ? (
           <div className="w-full max-w-[16rem]">
             <div className="relative">
               <span
@@ -89,7 +113,7 @@ function Coupon({ coupon, user }) {
           <Button
             text="Redeem"
             className={"text-base p-4 md:w-3/5 md:max-lg:w-4/5 justify-self-end"}
-            onClick={() => setShowCouponCode(true)}
+            onClick={handleRedeemClick}
           />
         ))}
       </div>
