@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Button from "../Button/Button";
 import closeIcon from "../../assets/icons/close.png";
+import { useUser } from "../../store/UserContext";
 
 function Step1(props) {
   const [images, setImages] = useState(props.images);
   const [errorMessage, setErrorMessage] = useState("");
+  const { currentPlant } = useUser();
 
   useEffect(() => {
     let removeErrorTimeout = setTimeout(() => {
@@ -96,6 +98,19 @@ function Step1(props) {
             />
           </div>
         ))}
+        {/* {currentPlant && <div>
+          <div className="relative">
+            <img
+              src={currentPlant?.cloudinaryUrls[0]}
+              style={{ width: "50px", height: "50px" }}
+            />
+            <img
+              src={closeIcon}
+              className="absolute -top-2 -right-2 w-5 h-5 cursor-pointer brightness-0"
+              onClick={() => removeImage(currentPlant?.cloudinaryUrls[0])}
+            />
+          </div>
+          </div>} */}
       </div>
       <Button
         text="Next"
