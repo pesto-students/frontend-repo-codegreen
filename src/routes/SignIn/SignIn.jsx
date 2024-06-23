@@ -61,6 +61,7 @@ function SignIn() {
                 type="email"
                 className="form-input input-style"
                 ref={emailRef}
+                required
               />
             </label>
             <label htmlFor="password" className="block w-full">
@@ -70,6 +71,7 @@ function SignIn() {
                 type="password"
                 className="form-input input-style"
                 ref={passwordRef}
+                required
               />
             </label>
             {

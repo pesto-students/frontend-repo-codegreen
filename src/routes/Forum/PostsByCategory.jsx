@@ -4,7 +4,7 @@ import Button from "../../components/Button/Button";
 import postIconBullet from "../../assets/icons/postBulletIcon.png";
 import { Link } from "react-router-dom";
 import CreatePost from "./CreatePost";
-import axios from "../../hooks/axiosConfig";
+import api from "../../hooks/axiosConfig"
 
 function PostsByCategory() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,7 +13,7 @@ function PostsByCategory() {
   useEffect(() => {
     const getPosts = async () => {
       try {
-        const response = await axios.get(
+        const response = await api.get(
           `api/forum`
         );
         const data = response.data;

@@ -50,6 +50,7 @@ function SignUp() {
                 type="text"
                 name="firstName"
                 className="form-input input-style"
+                required
               />
             </label>
             <label htmlFor="l-name" className="block w-full md:w-[45%]">
@@ -59,6 +60,7 @@ function SignUp() {
                 type="text"
                 name="lastName"
                 className="form-input input-style"
+                required
               />
             </label>
             <label htmlFor="email" className="block w-full md:w-[45%]">
@@ -68,6 +70,7 @@ function SignUp() {
                 type="email"
                 name="email"
                 className="form-input input-style"
+                required
               />
             </label>
             <label htmlFor="password" className="block w-full md:w-[45%]">
@@ -77,6 +80,7 @@ function SignUp() {
                 type="password"
                 name="password"
                 className="form-input input-style"
+                required
               />
             </label>
             {
