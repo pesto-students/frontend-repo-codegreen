@@ -60,7 +60,9 @@ function Dashboard() {
           />
         </div>
         <div className={styles.saplingsSection}>
-          <div className={styles.greetingTxt}>Your previous sapling logs</div>
+          <div className={styles.greetingTxt}>{
+            saplings.length > 0 ? "Your previous sapling logs" : "You have not added any saplings yet"
+            }</div>
           <div className="flex flex-col md:grid grid-cols-2 gap-4 mt-4">
             {saplings.map((sapling, index) => {
               return (
