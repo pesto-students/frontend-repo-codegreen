@@ -84,7 +84,7 @@ function SignIn() {
                 type="submit"
                />
            
-            <p className="text-sm">Forgot password?</p>
+          {/*   <p className="text-sm">Forgot password?</p> */}
           </form>
           {/* <span className="m-0 block form-divider w-full">or</span>
           <Button
