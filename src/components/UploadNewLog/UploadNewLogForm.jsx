@@ -5,6 +5,7 @@ import Step1 from "./Step1";
 import Step2 from "./Step2";
 import { useNavigate } from "react-router-dom";
 import api from "../../hooks/axiosConfig";
+import Step3 from "./Step3.jsx"
 
 
 function UploadNewLogForm() {
@@ -44,9 +45,8 @@ function UploadNewLogForm() {
           `/api/plantation/createNewPlantation`, formData
         );
         if(response.status === 200){
-          // console.log("200 success", response.data )
-          setIsModalOpen(false)
-          navigate("/dashboard");
+          console.log("200 success", response.data )
+          setCurrentStep(3)
         }        
       } catch (error) {
         console.log(error.message);
@@ -68,6 +68,7 @@ function UploadNewLogForm() {
 
       />
       <div className="bg-light-green rounded-xl w-[80vw] min-h-[80vh] p-8 md:p-20 flex flex-col items-center gap-10 ">
+        {currentStep !== 3 &&
         <div
           id="steps-indicator"
           className="flex gap-3 w-full md:w-[60%] justify-center items-center"
@@ -98,12 +99,18 @@ function UploadNewLogForm() {
             2
           </div>
         </div>
-
-        {currentStep === 1 ? (
-          <Step1 onNextClick={getImages} images={images}/>
-        ) : (
-          <Step2 onDetailsSubmit={sendDataToServer} onBackPress={() => setCurrentStep(1)} milestones={milestones}/>
-        )}
+}
+        {currentStep === 1 && (
+        <Step1 onNextClick={getImages} images={images} />
+      )}
+      {currentStep === 2 && (
+        <Step2
+          onDetailsSubmit={sendDataToServer}
+          onBackPress={() => setCurrentStep(1)}
+          milestones={milestones}
+        />
+      )}
+      {currentStep === 3 && <Step3 />}
       </div>
     </div>
   );
