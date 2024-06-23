@@ -117,7 +117,7 @@ function Step2(props) {
             Select one or more Milestones
           </legend>
 
-          <ul className="flex flex-col lg:flex-row w-full gap-6 md:grid-cols-3">
+          <ul className="flex flex-wrap flex-row w-full gap-4 md:gap-6">
             {props.milestones.map((milestone, index) => {
               return (
                 <li
@@ -147,20 +147,21 @@ function Step2(props) {
           </ul>
         </fieldset>
 
-        <div className="w-full flex flex-row justify-end">
+          <div className="w-full flex-nowrap flex justify-between items-center flex-row-reverse mt-8 gap-8">
           <Button
             text="Submit"
-            className="mt-8 md:w-[40%]"
+            className="mt-8 md:w-[30%]"
             onClick={handleSubmit}
           />
-        </div>
 
         <Button
           text="Back"
-          className="mt-8 lg:w-[30%]"
+          className="mt-8 md:w-[30%]"
           bgColor="dark-green"
           onClick={props.onBackPress}
         />
+        </div>
+        
       </form>
     </>
   );

@@ -23,7 +23,7 @@ function SignIn() {
             email: emailRef.current.value,
             password: passwordRef.current.value,
           });
-          const data = response.data;
+          const data = response?.data;
           setUser(data.user);
           localStorage.setItem('user', JSON.stringify(data.user));
           localStorage.setItem("token", data.token);
