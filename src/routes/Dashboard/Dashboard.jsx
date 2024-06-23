@@ -16,7 +16,6 @@ function Dashboard() {
   useEffect(() => {
     api.get('api/plantation/')
     .then(response => {
-      console.log("plants data", response.data);
       setSaplings(response.data)
     })
     .catch(error => {
@@ -24,7 +23,7 @@ function Dashboard() {
     })
   }, [isModalOpen]
   )
-  
+
   return (
     <>
     {isModalOpen ? <UploadNewLogForm /> :
@@ -65,10 +64,12 @@ function Dashboard() {
           <div className="flex flex-col md:grid grid-cols-2 gap-4 mt-4">
             {saplings.map((sapling, index) => {
               return (
-                <div className="bg-light-green relative rounded-tr-4xl rounded-bl-4xl flex flex-row justify-center mb-2 md:mb-6" key={index}>
-                  {/* <div className="absolute top-[-15px] bg-dark-green text-white font-semibold text-sm rounded-3xl pl-3 pr-3 pt-2 pb-2 md:text-base">{sapling.status}</div> */}
-                  <img src={sapling?.cloudinaryUrls[0]} className="w-2/6 h-6/6 md:h-4/6 rounded-lg m-3 mb-6 ml-6 md:mb-3 mt-8" />
-                  <div className="flex flex-col mt-4 ml-4 mr-6">
+                <div className="bg-light-green relative rounded-tr-4xl rounded-bl-4xl flex flex-col md:flex-row justify-center mb-2 md:mb-6 p-4" key={index}>
+                  <div className="w-full md:w-1/2 flex justify-center items-center">
+                    <img src={sapling?.cloudinaryUrls[0]} className="w-[200px] h-[200px] object-cover rounded-lg " />
+                  </div>
+                  
+                  <div className="w-full md:w-1/2 flex flex-col mt-4 ml-4 mr-6">
                     <div className={styles.spName}>{sapling?.treeName}</div>
                     <div className={styles.spDate}>Date : { new Date(sapling?.plantationDate).toLocaleDateString('en-GB', dateoOtions)}</div>
                     <div className={styles.spLocation}>
