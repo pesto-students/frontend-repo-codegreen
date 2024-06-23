@@ -21,6 +21,8 @@ function Step2(props) {
         (milestone) => milestone._id
       );
       setSelectedMilestones(milestoneIds);
+    }else{
+      logDetails.date.current.value = new Date().toISOString().split("T")[0];
     }
     async function success(position) {
       const latitude = position.coords.latitude;
