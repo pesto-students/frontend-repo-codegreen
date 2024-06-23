@@ -33,13 +33,8 @@ function UploadNewLogForm() {
     setImages(images);
   };
 
-  const getDetails = (details) => {
-    setDetails(details);
-    sendDataToServer();
-  };
-
-  //send images and details combined to server
-  const sendDataToServer = async () => {
+   //send images and details combined to server
+  const sendDataToServer = async (details) => {
     const formData = new FormData();
     formData.append("image", images[0]);
     formData.append("details", JSON.stringify(details)); 
@@ -107,7 +102,7 @@ function UploadNewLogForm() {
         {currentStep === 1 ? (
           <Step1 onNextClick={getImages} images={images}/>
         ) : (
-          <Step2 onDetailsSubmit={getDetails} onBackPress={() => setCurrentStep(1)} milestones={milestones}/>
+          <Step2 onDetailsSubmit={sendDataToServer} onBackPress={() => setCurrentStep(1)} milestones={milestones}/>
         )}
       </div>
     </div>

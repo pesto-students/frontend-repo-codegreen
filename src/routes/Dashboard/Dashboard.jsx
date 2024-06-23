@@ -12,6 +12,7 @@ function Dashboard() {
   const [saplings, setSaplings] = useState([])
   const { user, isModalOpen, setIsModalOpen, setCurrentPlant } = useUser();
   const dateoOtions = { year: 'numeric', month: 'long', day: 'numeric' };
+
   useEffect(() => {
     api.get('api/plantation/')
     .then(response => {
@@ -21,8 +22,9 @@ function Dashboard() {
     .catch(error => {
       console.error('There was an error!', error);
     })
-  }, []
+  }, [isModalOpen]
   )
+  
   return (
     <>
     {isModalOpen ? <UploadNewLogForm /> :

@@ -3,27 +3,26 @@ import Button from "../Button/Button";
 import api from "../../hooks/axiosConfig";
 import { useUser } from "../../store/UserContext";
 
-
 function Step2(props) {
   const [location, setLocation] = useState("");
   const { currentPlant } = useUser();
   const [selectedMilestones, setSelectedMilestones] = useState([]);
-  
+
   useEffect(() => {
-    // console.log('current plan 2', currentPlant)
     if (currentPlant) {
+      console.log("current plant", currentPlant);
       // Set initial values from currentPlant if available
       logDetails.treeName.current.value = currentPlant.treeName || "";
       // setLocation(currentPlant.location || "");
       logDetails.date.current.value = currentPlant.plantationDate
-        ? new Date(currentPlant.plantationDate).toISOString().split('T')[0]
+        ? new Date(currentPlant.plantationDate).toISOString().split("T")[0]
         : "";
-        const milestoneIds = currentPlant.milestones.map(milestone => milestone._id);
-        setSelectedMilestones(milestoneIds);
+      const milestoneIds = currentPlant.milestones.map(
+        (milestone) => milestone._id
+      );
+      setSelectedMilestones(milestoneIds);
     }
-    // console.log("selected", selectedMilestones)
-
-     async function success(position) {
+    async function success(position) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
 
@@ -44,14 +43,13 @@ function Step2(props) {
     }
   }, []);
 
-
   const logDetails = {
     treeName: useRef(""),
     date: useRef(""),
   };
 
   const handleMilestoneSelection = (milestoneId) => {
-      setSelectedMilestones((prev) => {
+    setSelectedMilestones((prev) => {
       if (prev.includes(milestoneId)) {
         return prev.filter((id) => id !== milestoneId);
       } else {
@@ -61,7 +59,7 @@ function Step2(props) {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const details = {
       treeName: logDetails.treeName.current.value,
       location: location,
@@ -118,13 +116,13 @@ function Step2(props) {
           </legend>
 
           <ul className="flex flex-col lg:flex-row w-full gap-6 md:grid-cols-3">
-           {props.milestones.map((milestone, index) => {
+            {props.milestones.map((milestone, index) => {
               return (
                 <li
                   key={`milestone-${index}`}
                   className="flex flex-row flex-wrap gap-3"
                 >
-                <input
+                  <input
                     type="checkbox"
                     id={`milestone-${index}`}
                     value={milestone.name}
@@ -142,7 +140,7 @@ function Step2(props) {
                     </div>
                   </label>
                 </li>
-            );
+              );
             })}
           </ul>
         </fieldset>
