@@ -12,8 +12,9 @@ function UploadNewLogForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [images, setImages] = useState([]);
   const [details, setDetails] = useState({});
-  const { isModalOpen, setIsModalOpen } = useUser();
+  const { isModalOpen, setIsModalOpen, setUser, user } = useUser();
   const [milestones, setMilestones] = useState([]);
+  const { currentPlant } = useUser();
   const navigate = useNavigate();
   useEffect(() => {
   async function getMilestones() {
@@ -40,28 +41,61 @@ function UploadNewLogForm() {
     formData.append("image", images[0]);
     formData.append("details", JSON.stringify(details)); 
     console.log("formData", images, details)
-    try {
+
+    if(currentPlant){
+      try {
+        const response = await api.put(
+          `/api/plantation/updatePlantation/${currentPlant?._id}`, formData
+        );
+        if(response.status === 200){
+          console.log("200 success", response.data )
+          setCurrentStep(3)
+          api.get(`api/user/getUser/${user._id}`)
+          .then(response => {
+            setUser(response.data)
+          })
+          .catch(error => {
+            console.error('There was an error!', error);
+          })
+
+        }        
+      } catch (error) {
+        console.log(error.message);
+      }
+
+    }else{
+      try {
         const response = await api.post(
           `/api/plantation/createNewPlantation`, formData
         );
         if(response.status === 200){
           console.log("200 success", response.data )
           setCurrentStep(3)
+          api.get(`api/user/getUser/${user._id}`)
+          .then(response => {
+            setUser(response.data)
+          })
+          .catch(error => {
+            console.error('There was an error!', error);
+          })
+
         }        
       } catch (error) {
         console.log(error.message);
       }
+    }
+    
   };
 
   return (
     <div
       id="upload-new-log"
-      className="h-full absolute bg-darkest-green w-full py-10 left-0 top-0 flex items-center justify-center"
+      className="absolute bg-darkest-green w-full py-10 pb-64 left-0 top-0 flex items-center justify-center"
     >
       <img
         src={closeIcon}
         alt="Close Pop-up and go back"
-        className="absolute w-10 h-10 right-10 top-10"
+        className="absolute w-10 h-10 right-4 top-10 md:right-10 lg:right-22 xl:right-32"
         onClick={() => {
           setIsModalOpen(false)
         }}

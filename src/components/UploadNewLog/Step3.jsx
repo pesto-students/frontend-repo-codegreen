@@ -10,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import closeIcon from "../../assets/icons/close.png";
 import { useUser } from "../../store/UserContext";
+import Button from "../Button/Button";
 
 function Step3() {
   const { setIsModalOpen } = useUser();
@@ -49,11 +50,11 @@ function Step3() {
 
   return (
     <div className="flex flex-col bg-light-green gap-6 p-0">
-      <h1 className="font-semibold text-left text-3xl mt-24 md:text-5xl w-full">
+      <h1 className="font-semibold text-left text-3xl mt-0 md:text-5xl w-full">
         Great going
       </h1>
       <div className="text-lg">Here are some tips to help with your tree journey</div>
-      <div className="flex flex-col rounded-xl w-full h-full md:grid grid-cols-3 gap-6">
+      <div className="flex flex-col rounded-xl w-full h-full lg:grid grid-cols-3 gap-6">
         {tips.map((tip, index) => (
           <div key={index} className="bg-beige flex flex-col rounded-tl-4xl rounded-br-4xl p-6 gap-4">
             <div>
@@ -64,6 +65,7 @@ function Step3() {
           </div>
         ))}
       </div>
+      <Button className="lg:w-[30%] place-self-end"  text="Got it" onClick={() => {setIsModalOpen(false)}} />
     </div>
   );
 }
