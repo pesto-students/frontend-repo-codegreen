@@ -1,70 +1,15 @@
-# Getting Started with Create React App
+# What is GreenGrow?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+GreenGrow is a web platform for tree planting initiatives, tracking their progress, and contributing to a greener and more sustainable planet. 
 
-## Available Scripts
+## Live Website
+Visit https://greengrow.vercel.app/ and log-in with test credentials sanika.p@gmail.com/sanika123
 
-In the project directory, you can run:
+### Screenshots
 
-### `npm start`
+![screencapture-greengrow-vercel-app-2024-06-24-09_10_49](https://github.com/pesto-students/frontend-repo-codegreen/assets/122958363/c6f73341-0b12-4897-aa94-ab7ef427b91f)
+![screencapture-greengrow-vercel-app-dashboard-2024-06-24-09_14_23](https://github.com/pesto-students/frontend-repo-codegreen/assets/122958363/7747e283-7757-4c9d-9332-25895252e5a3)
+![Screenshot 2024-06-24 091250](https://github.com/pesto-students/frontend-repo-codegreen/assets/122958363/3dc50e3d-3b2e-44fe-b151-a2595250c87b)
+![screencapture-greengrow-vercel-app-shop-2024-06-24-09_13_35](https://github.com/pesto-students/frontend-repo-codegreen/assets/122958363/d60c1a8a-173e-49b2-9d84-b677171c35f4)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
